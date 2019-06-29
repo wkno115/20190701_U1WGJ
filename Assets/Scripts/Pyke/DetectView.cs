@@ -47,7 +47,6 @@ namespace Pyke
                         var target = collider.GetComponent<TTargetViewComponent>();
                         if (target != null && !attackedTargets.Contains(target))
                         {
-                            print(target.Position);
                             if (_onDetectEffect != null)
                             {
                                 _onDetectEffect.Play(target.Position);

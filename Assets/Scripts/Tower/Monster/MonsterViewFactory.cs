@@ -48,7 +48,9 @@ namespace Tower.Monster
                     break;
             }
 
-            return Object.Instantiate(monsterView, spawnPosition, Quaternion.identity);
+            var createdView = Object.Instantiate(monsterView, spawnPosition, Quaternion.identity);
+            createdView.gameObject.SetActive(true);
+            return createdView;
         }
     }
 }
