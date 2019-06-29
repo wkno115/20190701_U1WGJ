@@ -19,19 +19,6 @@ namespace Puzzle
             _disposables.Add(disposable);
         }
 
-        public IEnumerator<IDisposable> GetEnumerator()
-        {
-            var res = new List<IDisposable>();
-            foreach (var d in _disposables)
-            {
-                if (d != null)
-                {
-                    res.Add(d);
-                }
-            }
-            return res.GetEnumerator();
-        }
-
         public void Dispose()
         {
             foreach (var i in _disposables)
