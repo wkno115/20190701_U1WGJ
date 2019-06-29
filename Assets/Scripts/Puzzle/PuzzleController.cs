@@ -10,7 +10,6 @@ namespace Puzzle
 {
     public class PuzzleController
     {
-
         readonly PuzzleUI _ui;
         readonly PuzzleDomain _domain;
 
@@ -30,7 +29,8 @@ namespace Puzzle
 
         public IEnumerable Run()
         {
-            using (_ui.GetTapSquareContainer().SubscribeTap(_domain.ChangeSquares))
+            using(_domain.Su)
+            using (_ui.GetTapSquareContainer().SubscribeTap(_domain.ChangePieces))
             {
                 while (true)
                 {

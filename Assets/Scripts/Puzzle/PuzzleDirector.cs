@@ -19,12 +19,10 @@ namespace Puzzle
         [SerializeField]
         PuzzleUI _ui;
 
-        readonly EventPublisher<PuzzleSphere[]> _resultEventPublisher = new EventPublisher<PuzzleSphere[]>();
-
-        PuzzleController controller;
+        PuzzleController _puzzleController;
 
 
-        public IDisposable SubscribeResult(Action<PuzzleSphere[]> action) => _resultEventPublisher.Subscribe(action);
+        public IDisposable SubscribeResult(Action<PuzzleSphere[]> action) => _puzzleController.SubscribeResult(action);
 
 
         private IEnumerator Start()
@@ -47,9 +45,9 @@ namespace Puzzle
                 yield return null;
             }
 
-            controller = new PuzzleController(_ui, domain);
+            _puzzleController = new PuzzleController(_ui, domain);
 
-            foreach (var _ in controller.Initialize())
+            foreach (var _ in _puzzleController.Initialize())
             {
                 yield return null;
             }
@@ -61,7 +59,7 @@ namespace Puzzle
         /// <returns>処理中 IEnumerable</returns>
         public IEnumerable Run(Func<bool> shouldContinue)
         {
-            foreach (var _ in controller.Run())
+            foreach (var _ in _puzzleController.Run())
             {
                 if (!shouldContinue())
                 {
