@@ -29,7 +29,7 @@ namespace Puzzle
 
         public IEnumerable Run()
         {
-            using(_domain.Su)
+            //using(_domain.Su)
             using (_ui.GetTapSquareContainer().SubscribeTap(_domain.ChangePieces))
             {
                 while (true)
