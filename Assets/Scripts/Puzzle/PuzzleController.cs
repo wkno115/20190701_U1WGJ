@@ -40,9 +40,12 @@ namespace Puzzle
             {
                 while (true)
                 {
-                    foreach (var _ in animationProcess)
+                    if (animationProcess != null)
                     {
-                        yield return null;
+                        foreach (var _ in animationProcess)
+                        {
+                            yield return null;
+                        }
                     }
                     yield return null;
                 }
