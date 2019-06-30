@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace Puzzle
 {
+    /// <summary>
+    /// パズルコントローラ
+    /// </summary>
     public class PuzzleController
     {
         readonly PuzzleUI _ui;
@@ -29,11 +32,18 @@ namespace Puzzle
 
         public IEnumerable Run()
         {
-            //using(_domain.Su)
+            IEnumerable animationProcess = null;
+
             using (_ui.GetTapSquareContainer().SubscribeTap(_domain.ChangePieces))
+            using (_ui.SubscribeInputKey(_ => _domain.Result()))
+            using (_domain.SubscribeMove(directionAndCoordinate => animationProcess = _ui.MoveAnimation(directionAndCoordinate)))
             {
                 while (true)
                 {
+                    foreach (var _ in animationProcess)
+                    {
+                        yield return null;
+                    }
                     yield return null;
                 }
             }

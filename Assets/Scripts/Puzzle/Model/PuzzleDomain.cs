@@ -18,12 +18,12 @@ namespace Puzzle.Model
         /// <summary>
         /// パズル移動イベント発行者
         /// </summary>
-        readonly EventPublisher<(View.TapSquareComponent.Direction direction, int column, int row)> _moveEventPublisher = new EventPublisher<(View.TapSquareComponent.Direction direction, int column, int row)>();
+        readonly EventPublisher<(View.TapSquareComponent.Direction direction, byte column, byte row)> _moveEventPublisher = new EventPublisher<(View.TapSquareComponent.Direction direction, byte column, byte row)>();
 
         /// <summary>
         /// 全マス
         /// </summary>
-        PuzzlePieceCollection _pieces;
+        PuzzlePieceCollection _pieceCollection;
 
 
         /// <summary>
@@ -31,9 +31,9 @@ namespace Puzzle.Model
         /// </summary>
         /// <param name="columns">列</param>
         /// <param name="rows">行</param>
-        public PuzzleDomain(int columns, int rows)
+        public PuzzleDomain(byte columns, byte rows)
         {
-            _pieces = new PuzzlePieceCollection(columns, rows);
+            _pieceCollection = new PuzzlePieceCollection(columns, rows);
         }
 
         /// <summary>
@@ -47,29 +47,32 @@ namespace Puzzle.Model
         /// </summary>
         /// <param name="action">紐づけ処理</param>
         /// <returns>購読解除</returns>
-        public IDisposable SubscribeMove(Action<(View.TapSquareComponent.Direction direction, int column, int row)> action) => _moveEventPublisher.Subscribe(action);
+        public IDisposable SubscribeMove(Action<(View.TapSquareComponent.Direction direction, byte column, byte row)> action) => _moveEventPublisher.Subscribe(action);
+        /// <summary>
+        /// 全ピースを取得
+        /// </summary>
+        /// <returns>全ピース</returns>
+        public PieceColor[,] GetAllPieces() => _pieceCollection.GetPieces();
 
         public IEnumerable Initialize()
         {
+            Reset();
             yield return null;
         }
 
-        public void ChangePieces((View.TapSquareComponent.Direction direction, int column, int row) directionAndCoordinate)
+        public void ChangePieces((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate)
         {
-            //ピースの変更
+            _pieceCollection.ChangePieces(directionAndCoordinate);
+            Debug.Log(_pieceCollection.ToString());
             _moveEventPublisher.Publish(directionAndCoordinate);
         }
-
         public void Result()
         {
-            PuzzleSphere[] results = new PuzzleSphere[4];
-            //結果をなんかいろいろして詰める．
-            _resultEventPublisher.Publish(results);
+            _resultEventPublisher.Publish(_pieceCollection.GetResultSpheres());
         }
-
         public void Reset()
         {
-            //ピースの配列内をリセットする．
+            _pieceCollection.Reset();
         }
     }
 }

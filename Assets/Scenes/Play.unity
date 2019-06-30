@@ -447,7 +447,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007484783}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -465,11 +465,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PuzzleUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 3881336632933085283, guid: 61a209ad8810a394a9556c132f6430bd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3881336632933085311, guid: 61a209ad8810a394a9556c132f6430bd,
         type: 3}
