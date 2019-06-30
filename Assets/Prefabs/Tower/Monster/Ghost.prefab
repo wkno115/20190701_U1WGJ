@@ -110,7 +110,7 @@ MonoBehaviour:
   _monsterState:
     _monsterType: 0
     PieceColor: 0
-    MovementSpeed: 10
+    MovementSpeed: 5
     Hp: 100
     AttackDamage: 100
   _collisionHandleComponent: {fileID: 2855881090751268679}
@@ -216,6 +216,12 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95000013357091332, guid: e067a1df356d3e84bb3f15113b018f67,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 4a4295fd349145b449403d75097b6911,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e067a1df356d3e84bb3f15113b018f67, type: 3}
 --- !u!4 &6290657267852359729 stripped

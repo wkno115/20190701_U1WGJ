@@ -2,8 +2,8 @@
 {
     public enum MonsterType
     {
-        ork,
-        witch,
-        elf,
+        ghost,
+        bat,
+        rabbit,
     }
 }
