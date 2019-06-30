@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2599039636339604442}
   - component: {fileID: 5078806985236016007}
   - component: {fileID: 1503083287983632589}
-  - component: {fileID: 1721192891288976090}
   - component: {fileID: 9142655945977486727}
   - component: {fileID: 8177968546845998120}
+  - component: {fileID: 992385927405839977}
   m_Layer: 0
   m_Name: TestProjectile
   m_TagString: Untagged
@@ -94,20 +94,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1721192891288976090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6651286710476341680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165aebf32df8e5642b26e515ee0898d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _detectView: {fileID: 9142655945977486727}
-  _deadTime: 10
 --- !u!114 &9142655945977486727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,3 +124,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shouldDebug: 0
+--- !u!114 &992385927405839977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6651286710476341680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0c6c919b84b3449b9fe5eeb0885ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deadTime: 10
+  _puzzleProjectileState:
+    _pieceColor: 0
+    _attackPower: 100
+    _movementSpeed: 100

@@ -1,4 +1,4 @@
-﻿using Pyke;
+﻿using Puzzle;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,35 +16,29 @@ namespace Tower
         [SerializeField]
         MonsterSpawnInfo[] _monsterSpawnInfo;
         [SerializeField]
-        LaneInfoContainer _laneInfoContainer;
+        LaneViewContainer _laneViewContainer;
         [SerializeField]
-        DeadLineView _deadLineView;
-        [SerializeField]
-        CannonView _cannonView1;
-        [SerializeField]
-        CannonView _cannonView2;
-        [SerializeField]
-        CannonView _cannonView3;
-        [SerializeField]
-        CannonView _cannonView4;
-        [SerializeField]
-        ProjectileView _testProjectileView;
+        PuzzleProjectileViewContainer _puzzleProjectileViewContainer;
 
         MonsterViewFactory _monsterViewFactory;
+        List<MonsterView> _spawnMonsterViews = new List<MonsterView>();
         MonsterSpawnInfo[] _monsterSpawnInfoOrderedByTime;
-        float _timer;
         int _nextSpawnMonsterIndex;
         bool _shouldSpawnMonster = true;
 
-        List<MonsterView> _spawnMonsterViews = new List<MonsterView>();
+        PuzzleProjectileFactory _puzzleProjectileFactory;
+
+        float _timer;
 
         IEnumerator Start()
         {
-            _monsterViewFactory = new MonsterViewFactory(_monsterViewContainer, _laneInfoContainer);
+            _monsterViewFactory = new MonsterViewFactory(_monsterViewContainer, _laneViewContainer);
             _monsterSpawnInfoOrderedByTime = _monsterSpawnInfo.OrderBy(info => info.Time).ToArray();
 
+            _puzzleProjectileFactory = new PuzzleProjectileFactory(_puzzleProjectileViewContainer);
+
             var shouldContinue = true;
-            using (_deadLineView.SubscribeMonsterViewEnter(monsterView => shouldContinue = false))
+            using (_laneViewContainer.DeadLineView.SubscribeMonsterViewEnter(monsterView => shouldContinue = false))
             {
                 while (shouldContinue)
                 {
@@ -52,19 +46,19 @@ namespace Tower
 
                     if (Input.GetKeyDown(KeyCode.Alpha1))
                     {
-                        StartCoroutine(Shoot(0, 1));
+                        StartCoroutine(Shoot(PieceColor.Red, 1));
                     }
                     if (Input.GetKeyDown(KeyCode.Alpha2))
                     {
-                        StartCoroutine(Shoot(0, 2));
+                        StartCoroutine(Shoot(PieceColor.Red, 2));
                     }
                     if (Input.GetKeyDown(KeyCode.Alpha3))
                     {
-                        StartCoroutine(Shoot(0, 3));
+                        StartCoroutine(Shoot(PieceColor.Red, 3));
                     }
                     if (Input.GetKeyDown(KeyCode.Alpha4))
                     {
-                        StartCoroutine(Shoot(0, 4));
+                        StartCoroutine(Shoot(PieceColor.Red, 4));
                     }
 
                     _spawnMonster();
@@ -100,28 +94,12 @@ namespace Tower
             }
         }
 
-        IEnumerator Shoot(int projectileTypeId, byte lane)
+        IEnumerator Shoot(PieceColor pieceColor, byte lane)
         {
-            CannonView cannonView = null;
-            switch (lane)
-            {
-                case 1:
-                    cannonView = _cannonView1;
-                    break;
-                case 2:
-                    cannonView = _cannonView2;
-                    break;
-                case 3:
-                    cannonView = _cannonView3;
-                    break;
-                case 4:
-                    cannonView = _cannonView4;
-                    break;
-                default:
-                    throw new System.ArgumentOutOfRangeException("lane must be between 1 and 4.");
-            }
+            CannonView cannonView = _laneViewContainer.GetLaneViewFromLaneNumber(lane).CannonView;
 
-            foreach (var hitTarget in cannonView.Shoot(_testProjectileView))
+            var puzzleProjectileView = _puzzleProjectileFactory.CreatePuzzleProjectile(pieceColor);
+            foreach (var hitTarget in cannonView.Shoot(puzzleProjectileView))
             {
                 if (hitTarget != null)
                 {

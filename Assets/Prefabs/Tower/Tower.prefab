@@ -104,6 +104,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163abc2ebd91c694bab7f2b91bef15c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1832787472992739841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5517986019214933217}
+  - component: {fileID: 449253881359807525}
+  m_Layer: 0
+  m_Name: PuzzleProjectileViewContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5517986019214933217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832787472992739841}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4043216957345370904}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &449253881359807525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832787472992739841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d919de9099680b5459e171497e3d3670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _puzzleProjectileViews:
+  - {fileID: 992385927405839977, guid: 8791345fb50952447956e16816a3fafd, type: 3}
 --- !u!1 &2862331714964839669
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +209,7 @@ Transform:
   m_Children:
   - {fileID: 6488796120270485848}
   - {fileID: 9184323106128517784}
+  - {fileID: 5517986019214933217}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -190,18 +236,8 @@ MonoBehaviour:
   - _monsterType: 2
     _lane: 4
     _time: 5
-  _laneInfoContainer:
-    _lane1SpawnPointTransform: {fileID: 8112190980299316838}
-    _lane2SpawnPointTransform: {fileID: 4910330612951258053}
-    _lane3SpawnPointTransform: {fileID: 677447299754289551}
-    _lane4SpawnPointTransform: {fileID: 314675622204804075}
-  _deadLineView: {fileID: 243768969658657542}
-  _cannonView1: {fileID: 5951089869963317648}
-  _cannonView2: {fileID: 3457807757921666233}
-  _cannonView3: {fileID: 4802414000748361588}
-  _cannonView4: {fileID: 4953824926333934579}
-  _testProjectileView: {fileID: 1721192891288976090, guid: 8791345fb50952447956e16816a3fafd,
-    type: 3}
+  _laneViewContainer: {fileID: 5548561861658168166}
+  _puzzleProjectileViewContainer: {fileID: 449253881359807525}
 --- !u!1 &5552218113103100115
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,8 +641,9 @@ GameObject:
   - component: {fileID: 2470005401764881485}
   - component: {fileID: 4134313315155843843}
   - component: {fileID: 2815380825798343378}
+  - component: {fileID: 5548561861658168166}
   m_Layer: 0
-  m_Name: Lane
+  m_Name: LaneViewContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,6 +727,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &5548561861658168166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6150197882310216963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe79802366814946bd400040cc99314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laneViews:
+  - {fileID: 2187580410582378999}
+  - {fileID: 3249669156543077779}
+  - {fileID: 1086307798698680805}
+  - {fileID: 4661805519565167137}
+  _deadLineView: {fileID: 243768969658657542}
 --- !u!1 &6209995105122421309
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 769415108324492391}
+  - component: {fileID: 2187580410582378999}
   m_Layer: 0
   m_Name: Lane1
   m_TagString: Untagged
@@ -793,6 +849,22 @@ Transform:
   m_Father: {fileID: 6488796120270485848}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2187580410582378999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836136401217191623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f4f4be5b4d0b34e991ff6b1bcaae7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laneState:
+    _laneNumber: 1
+    _monsterSpawnPoint: {fileID: 8112190980299316838}
+  _cannonView: {fileID: 5951089869963317648}
 --- !u!1 &8096473621053879636
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6783069118929688425}
+  - component: {fileID: 3249669156543077779}
   m_Layer: 0
   m_Name: Lane2
   m_TagString: Untagged
@@ -855,6 +928,22 @@ Transform:
   m_Father: {fileID: 6488796120270485848}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3249669156543077779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8227775863380371378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f4f4be5b4d0b34e991ff6b1bcaae7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laneState:
+    _laneNumber: 2
+    _monsterSpawnPoint: {fileID: 4910330612951258053}
+  _cannonView: {fileID: 3457807757921666233}
 --- !u!1 &8288147926768485902
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,6 +983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4803286996783105446}
+  - component: {fileID: 1086307798698680805}
   m_Layer: 0
   m_Name: Lane3
   m_TagString: Untagged
@@ -917,6 +1007,22 @@ Transform:
   m_Father: {fileID: 6488796120270485848}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1086307798698680805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8757094495229629878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f4f4be5b4d0b34e991ff6b1bcaae7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laneState:
+    _laneNumber: 3
+    _monsterSpawnPoint: {fileID: 677447299754289551}
+  _cannonView: {fileID: 4802414000748361588}
 --- !u!1 &9062857952491748596
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,6 +1032,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8209173863679987548}
+  - component: {fileID: 4661805519565167137}
   m_Layer: 0
   m_Name: Lane4
   m_TagString: Untagged
@@ -949,3 +1056,19 @@ Transform:
   m_Father: {fileID: 6488796120270485848}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4661805519565167137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9062857952491748596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f4f4be5b4d0b34e991ff6b1bcaae7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laneState:
+    _laneNumber: 4
+    _monsterSpawnPoint: {fileID: 314675622204804075}
+  _cannonView: {fileID: 4953824926333934579}

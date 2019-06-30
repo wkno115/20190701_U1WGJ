@@ -3,7 +3,7 @@
 namespace Tower.Monster
 {
     [Serializable]
-    public class MonsterState
+    public struct MonsterState
     {
         public float MovementSpeed;
         public float Hp;

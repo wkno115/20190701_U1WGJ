@@ -6,34 +6,18 @@ namespace Tower.Monster
     public class MonsterViewFactory
     {
         MonsterViewContainer _monsterViewContainer;
-        LaneInfoContainer _laneInfoContainer;
+        LaneViewContainer _laneViewContainer;
 
-        public MonsterViewFactory(MonsterViewContainer monsterViewContainer, LaneInfoContainer laneInfoContainer)
+        public MonsterViewFactory(MonsterViewContainer monsterViewContainer, LaneViewContainer laneInfoContainer)
         {
             _monsterViewContainer = monsterViewContainer;
-            _laneInfoContainer = laneInfoContainer;
+            _laneViewContainer = laneInfoContainer;
         }
 
         public MonsterView CreateMonster(MonsterType monsterType, byte lane)
         {
-            Vector3 spawnPosition = Vector3.zero;
-            switch (lane)
-            {
-                case 1:
-                    spawnPosition = _laneInfoContainer.Lane1SpawnPointTransform.position;
-                    break;
-                case 2:
-                    spawnPosition = _laneInfoContainer.Lane2SpawnPointTransform.position;
-                    break;
-                case 3:
-                    spawnPosition = _laneInfoContainer.Lane3SpawnPointTransform.position;
-                    break;
-                case 4:
-                    spawnPosition = _laneInfoContainer.Lane4SpawnPointTransform.position;
-                    break;
-                default:
-                    throw new System.ArgumentOutOfRangeException("lane must be between 1 and 4.");
-            }
+            var spawnPosition = _laneViewContainer.GetLaneViewFromLaneNumber(lane).MonsterSpawnPosition;
+
             MonsterView monsterView = null;
             switch (monsterType)
             {
