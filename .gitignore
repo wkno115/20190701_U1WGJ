@@ -50,3 +50,9 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+#For DoTween
+Assets/Demigiant/
+Assets/Demigiant.meta
+Assets/Resources/
+Assets/Resources.meta
