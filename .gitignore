@@ -4,6 +4,7 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
+[Aa]ssets/[Ii]mportAssets
 
 # Never ignore Asset meta data
 ![Aa]ssets/**/*.meta

@@ -23,8 +23,6 @@ namespace Tower
 
         List<MonsterView> _activatedMonsterViews = new List<MonsterView>();
         Dictionary<float, MonsterView> _spawnTimeToMonsterView = new Dictionary<float, MonsterView>();
-        int _nextSpawnMonsterIndex;
-        bool _shouldSpawnMonster = true;
 
         PuzzleProjectileFactory _puzzleProjectileFactory;
 
