@@ -110,8 +110,8 @@ MonoBehaviour:
   _deadTime: 10
   _puzzleProjectileState:
     _pieceColor: 0
-    _attackPower: 100
-    _movementSpeed: 100
+    _attackPower: 50
+    _movementSpeed: 1000
 --- !u!114 &8177968546845998120
 MonoBehaviour:
   m_ObjectHideFlags: 0

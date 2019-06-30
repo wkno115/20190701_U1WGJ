@@ -14,7 +14,7 @@ namespace Tower.Cannon
             projectile.transform.SetParent(transform);
             projectile.transform.localPosition = Vector3.zero;
             _onFireEffect.Play();
-            foreach (var hitTarget in projectile.Shoot<MonsterView>(Vector3.forward, 10f))
+            foreach (var hitTarget in projectile.Shoot<MonsterView>(Vector3.forward, 30f))
             {
                 yield return hitTarget;
             }

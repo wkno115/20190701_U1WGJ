@@ -136,7 +136,12 @@ namespace Tower
             {
                 if (hitTarget != null)
                 {
-                    hitTarget.ChangeHp(-puzzleProjectileView.AttackPower);
+                    var damage = puzzleProjectileView.AttackPower;
+                    if (puzzleProjectileView.PieceColor == hitTarget.PieceColor)
+                    {
+                        damage *= 2;
+                    }
+                    hitTarget.ChangeHp(-damage);
                     break;
                 }
                 yield return null;
