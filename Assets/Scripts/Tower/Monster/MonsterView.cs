@@ -12,9 +12,10 @@ namespace Tower.Monster
     {
         [SerializeField]
         MonsterState _monsterState;
-
         [SerializeField]
         CollisionHandleComponent _collisionHandleComponent;
+
+        EventPublisher<MonsterView> _deadEventPublisher = new EventPublisher<MonsterView>();
 
         protected override void Awake()
         {
@@ -32,13 +33,18 @@ namespace Tower.Monster
             transform.position += deltaDirection * _monsterState.MovementSpeed;
         }
 
-        public IDisposable SubscribeTriggerEnter(Action<Collider> action)
+        public void ChangeHp(float diff)
         {
-            return _collisionHandleComponent.SubscribeTriggerEnter(action);
+            _monsterState.Hp += diff;
+            if (_monsterState.Hp <= 0)
+            {
+                _deadEventPublisher.Publish(this);
+                Destroy(gameObject);
+            }
         }
-        public IDisposable SubscribeDeadLineEnter(Action<DeadLineView> action)
-        {
-            return _collisionHandleComponent.SubscribeComponentTriggerEnter(action);
-        }
+
+        public IDisposable SubscribeDead(Action<MonsterView> action) => _deadEventPublisher.Subscribe(action);
+        public IDisposable SubscribeTriggerEnter(Action<Collider> action) => _collisionHandleComponent.SubscribeTriggerEnter(action);
+        public IDisposable SubscribeDeadLineEnter(Action<DeadLineView> action) => _collisionHandleComponent.SubscribeComponentTriggerEnter(action);
     }
 }

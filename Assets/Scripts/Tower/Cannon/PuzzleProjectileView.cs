@@ -10,5 +10,6 @@ namespace Tower.Cannon
         PuzzleProjectileState _puzzleProjectileState;
 
         public PieceColor PieceColor => _puzzleProjectileState.PieceColor;
+        public float AttackPower => _puzzleProjectileState.AttackPower;
     }
 }
