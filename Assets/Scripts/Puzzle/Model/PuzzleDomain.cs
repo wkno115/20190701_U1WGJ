@@ -18,7 +18,7 @@ namespace Puzzle.Model
         /// <summary>
         /// パズル移動イベント発行者
         /// </summary>
-        readonly EventPublisher<(View.TapSquareComponent.Direction direction, byte column, byte row)> _moveEventPublisher = new EventPublisher<(View.TapSquareComponent.Direction direction, byte column, byte row)>();
+        readonly EventPublisher<(View.TapSquareComponent.Direction direction, byte column, byte row)> _updatePiecesEventPublisher = new EventPublisher<(View.TapSquareComponent.Direction direction, byte column, byte row)>();
 
         /// <summary>
         /// 全マス
@@ -43,11 +43,11 @@ namespace Puzzle.Model
         /// <returns>購読解除</returns>
         public IDisposable SubscribeResult(Action<PuzzleSphere[]> action) => _resultEventPublisher.Subscribe(action);
         /// <summary>
-        /// 移動を購読する．
+        /// ピースの更新を購読する．
         /// </summary>
         /// <param name="action">紐づけ処理</param>
         /// <returns>購読解除</returns>
-        public IDisposable SubscribeMove(Action<(View.TapSquareComponent.Direction direction, byte column, byte row)> action) => _moveEventPublisher.Subscribe(action);
+        public IDisposable SubscribeUpdatePieces(Action<(View.TapSquareComponent.Direction direction, byte column, byte row)> action) => _updatePiecesEventPublisher.Subscribe(action);
         /// <summary>
         /// 全ピースを取得
         /// </summary>
@@ -63,8 +63,7 @@ namespace Puzzle.Model
         public void ChangePieces((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate)
         {
             _pieceCollection.ChangePieces(directionAndCoordinate);
-            Debug.Log(_pieceCollection.ToString());
-            _moveEventPublisher.Publish(directionAndCoordinate);
+            _updatePiecesEventPublisher.Publish(directionAndCoordinate);
         }
         public void Result()
         {

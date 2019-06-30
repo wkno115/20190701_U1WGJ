@@ -48,14 +48,14 @@ namespace Puzzle.View
             }
         }
         /// <summary>
-        /// 移動
+        /// ピース更新処理
         /// </summary>
         /// <param name="directionAndCoordinate"></param>
         /// <returns></returns>
-        public IEnumerable MoveAnimation((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate)
+        public IEnumerable UpdatePiecesProcess((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate, PieceColor[,] nextPieces)
         {
             _setInputActive(false);
-            foreach (var _ in _puzzlePieceContainer.MoveAnimation(directionAndCoordinate))
+            foreach (var _ in _puzzlePieceContainer.UpdatePieces(directionAndCoordinate, nextPieces))
             {
                 yield return null;
             }
