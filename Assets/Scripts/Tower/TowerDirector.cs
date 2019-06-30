@@ -23,8 +23,6 @@ namespace Tower
 
         List<MonsterView> _activatedMonsterViews = new List<MonsterView>();
         Dictionary<float, MonsterView> _spawnTimeToMonsterView = new Dictionary<float, MonsterView>();
-        int _nextSpawnMonsterIndex;
-        bool _shouldSpawnMonster = true;
 
         PuzzleProjectileFactory _puzzleProjectileFactory;
 
@@ -75,15 +73,15 @@ namespace Tower
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                StartCoroutine(Shoot(PieceColor.Red, 2));
+                StartCoroutine(Shoot(PieceColor.Blue, 2));
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                StartCoroutine(Shoot(PieceColor.Red, 3));
+                StartCoroutine(Shoot(PieceColor.Yellow, 3));
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                StartCoroutine(Shoot(PieceColor.Red, 4));
+                StartCoroutine(Shoot(PieceColor.Green, 4));
             }
         }
         List<float> _removedTimes = new List<float>();
@@ -125,9 +123,11 @@ namespace Tower
                 if (hitTarget != null)
                 {
                     hitTarget.ChangeHp(-puzzleProjectileView.AttackPower);
+                    break;
                 }
                 yield return null;
             }
+            Destroy(puzzleProjectileView.gameObject);
         }
     }
 }

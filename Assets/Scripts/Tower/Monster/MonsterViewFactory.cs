@@ -16,23 +16,9 @@ namespace Tower.Monster
 
         public MonsterView CreateMonster(MonsterType monsterType, byte lane)
         {
+            var monsterView = _monsterViewContainer.GetMonsterViewFromMonsterType(monsterType);
             var spawnPosition = _laneViewContainer.GetLaneViewFromLaneNumber(lane).MonsterSpawnPosition;
-
-            MonsterView monsterView = null;
-            switch (monsterType)
-            {
-                case MonsterType.ork:
-                    monsterView = _monsterViewContainer.OrkView;
-                    break;
-                case MonsterType.witch:
-                    monsterView = _monsterViewContainer.WitchView;
-                    break;
-                case MonsterType.elf:
-                    monsterView = _monsterViewContainer.ElfView;
-                    break;
-            }
-
-            var createdView = Object.Instantiate(monsterView, spawnPosition, Quaternion.identity);
+            var createdView = Object.Instantiate(monsterView, spawnPosition, Quaternion.AngleAxis(180, Vector3.up));
             createdView.gameObject.SetActive(true);
             return createdView;
         }
