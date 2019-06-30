@@ -94,16 +94,14 @@ namespace Puzzle.Model
             var count = isDown ? _pieces.GetLength(1) - 1 : 0;
             var diff = isDown ? -1 : 1;
             var end = isDown ? 0 : _pieces.GetLength(1) - 1;
-            var temp = _pieces[count, count];
+            var temp = _pieces[column, count];
 
-            var judge = isDown ? count + diff > end : count + diff < end;
-            while (judge)
+            while (isDown ? count > end : count < end)
             {
                 _pieces[column, count] = _pieces[column, count + diff];
                 count += diff;
-                judge = isDown ? count + diff > end : count + diff < end;
             }
-            _pieces[column, count] = temp;
+            _pieces[column, count ] = temp;
         }
         /// <summary>
         /// 行移動
@@ -118,12 +116,11 @@ namespace Puzzle.Model
             var diff = isRight ? -1 : 1;
             var end = isRight ? 0 : _pieces.GetLength(0) - 1;
             var temp = _pieces[count, row];
-            var judge = isRight ? count + diff > end : count + diff < end;
-            while (judge)
+
+            while (isRight ? count > end : count  < end)
             {
                 _pieces[count, row] = _pieces[count + diff, row];
                 count += diff;
-                judge = isRight ? count + diff > end : count + diff < end;
             }
             _pieces[count, row] = temp;
         }
