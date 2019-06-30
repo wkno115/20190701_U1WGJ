@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _monsterState:
+    _monsterType: 2
     MovementSpeed: 20
     Hp: 100
     AttackDamage: 100

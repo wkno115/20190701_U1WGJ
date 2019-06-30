@@ -123,9 +123,11 @@ namespace Tower
                 if (hitTarget != null)
                 {
                     hitTarget.ChangeHp(-puzzleProjectileView.AttackPower);
+                    break;
                 }
                 yield return null;
             }
+            Destroy(puzzleProjectileView.gameObject);
         }
     }
 }

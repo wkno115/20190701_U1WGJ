@@ -17,6 +17,8 @@ namespace Tower.Monster
 
         EventPublisher<MonsterView> _deadEventPublisher = new EventPublisher<MonsterView>();
 
+        public MonsterType MonsterType => _monsterState.MonsterType;
+
         protected override void Awake()
         {
             base.Awake();

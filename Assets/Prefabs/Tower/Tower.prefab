@@ -258,12 +258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dfa5c2f6d01814787da8d36bb0f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orkView: {fileID: 8797503815045763672, guid: 35223c06964608a4081492339b4ab8dc,
-    type: 3}
-  _witchView: {fileID: 3597792530139942748, guid: 8e5fe5ca5bd34cd44aae9cef59c24e69,
-    type: 3}
-  _elfView: {fileID: 3812403063633645825, guid: d0ccd5834cee8484db8dbbc893b04fbb,
-    type: 3}
+  _monsterViews:
+  - {fileID: 3812403063633645825, guid: d0ccd5834cee8484db8dbbc893b04fbb, type: 3}
+  - {fileID: 8797503815045763672, guid: 35223c06964608a4081492339b4ab8dc, type: 3}
+  - {fileID: 3597792530139942748, guid: 8e5fe5ca5bd34cd44aae9cef59c24e69, type: 3}
 --- !u!1 &6150197882310216963
 GameObject:
   m_ObjectHideFlags: 0
