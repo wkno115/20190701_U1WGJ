@@ -3,13 +3,21 @@ using UnityEngine;
 
 namespace Pyke
 {
+    [SerializeField]
+    [RequireComponent(typeof(DetectView))]
     public class ProjectileView : AbstractView
     {
         [SerializeField]
+        float _deadTime;
+
         DetectView _detectView;
 
-        [SerializeField]
-        float _deadTime;
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _detectView = GetComponent<DetectView>();
+        }
 
         public IEnumerable<TTargetViewComponent> Shoot<TTargetViewComponent>(Vector3 direction, float speed) where TTargetViewComponent : IUnityView
         {

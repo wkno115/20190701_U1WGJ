@@ -9,8 +9,9 @@ namespace Tower.Cannon
     {
         public IEnumerable<MonsterView> Shoot(ProjectileView projectile)
         {
-            var createdProjectile = Instantiate(projectile, transform);
-            foreach (var hitTarget in createdProjectile.Shoot<MonsterView>(Vector3.forward, 10f))
+            projectile.transform.SetParent(transform);
+            projectile.transform.localPosition = Vector3.zero;
+            foreach (var hitTarget in projectile.Shoot<MonsterView>(Vector3.forward, 10f))
             {
                 yield return hitTarget;
             }
