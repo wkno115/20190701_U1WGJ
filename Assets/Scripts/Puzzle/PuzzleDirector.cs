@@ -22,17 +22,18 @@ namespace Puzzle
         PuzzleController _puzzleController;
 
 
-        public IDisposable SubscribeResult(Action<PuzzleSphere[]> action) => _puzzleController.SubscribeResult(action);
-
-
         private IEnumerator Start()
         {
             foreach (var _ in Initialize())
             {
                 yield return null;
             }
-            foreach (var _ in Run(() => true))
+            while (true)
             {
+                foreach (var _ in Run(() => true))
+                {
+                    yield return null;
+                }
                 yield return null;
             }
         }
@@ -40,7 +41,7 @@ namespace Puzzle
         public IEnumerable Initialize()
         {
             var domain = new PuzzleDomain(COLUMNS, ROWS);
-            foreach(var _ in domain.Initialize())
+            foreach (var _ in domain.Initialize())
             {
                 yield return null;
             }
@@ -61,16 +62,19 @@ namespace Puzzle
         /// 実行
         /// </summary>
         /// <returns>処理中 IEnumerable</returns>
-        public IEnumerable Run(Func<bool> shouldContinue)
+        public IEnumerable<PuzzleSphere[]> Run(Func<bool> shouldContinue)
         {
-            foreach (var _ in _puzzleController.Run())
+            PuzzleSphere[] result = null;
+            foreach (var element in _puzzleController.Run())
             {
-                if (!shouldContinue())
+                yield return null;
+                result = element;
+                if (result != null)
                 {
                     yield break;
                 }
-                yield return null;
             }
+            yield return result;
         }
     }
 }

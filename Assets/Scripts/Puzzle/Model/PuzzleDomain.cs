@@ -67,6 +67,7 @@ namespace Puzzle.Model
         }
         public void Result()
         {
+            _pieceCollection.Reset();
             _resultEventPublisher.Publish(_pieceCollection.GetResultSpheres());
         }
         public void Reset()
