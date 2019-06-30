@@ -1,4 +1,5 @@
-﻿using Pyke;
+﻿using Puzzle;
+using Pyke;
 using System;
 using Tower.Lane;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Tower.Monster
         MonsterState _monsterState;
         [SerializeField]
         CollisionHandleComponent _collisionHandleComponent;
+        [SerializeField]
+        GameObject _meshMaterialObject;
 
         EventPublisher<MonsterView> _deadEventPublisher = new EventPublisher<MonsterView>();
 
@@ -43,6 +46,12 @@ namespace Tower.Monster
                 _deadEventPublisher.Publish(this);
                 Destroy(gameObject);
             }
+        }
+
+        public void SetColor(PieceColor pieceColor)
+        {
+            _monsterState.PieceColor = pieceColor;
+            _meshMaterialObject.GetComponent<Renderer>().material.color = pieceColor.ToColor();
         }
 
         public IDisposable SubscribeDead(Action<MonsterView> action) => _deadEventPublisher.Subscribe(action);

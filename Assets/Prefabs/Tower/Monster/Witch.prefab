@@ -109,10 +109,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monsterState:
     _monsterType: 1
+    PieceColor: 0
     MovementSpeed: 5
     Hp: 100
     AttackDamage: 100
   _collisionHandleComponent: {fileID: 8933729344918051980}
+  _meshMaterialObject: {fileID: 6919794712751772800}
 --- !u!114 &8933729344918051980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +221,12 @@ PrefabInstance:
 --- !u!4 &6919135263795238402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013189255144, guid: d82532fc4fd80bf4097d29efd331a0ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 6920767232634706410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6919794712751772800 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000013180751210, guid: d82532fc4fd80bf4097d29efd331a0ff,
     type: 3}
   m_PrefabInstance: {fileID: 6920767232634706410}
   m_PrefabAsset: {fileID: 0}

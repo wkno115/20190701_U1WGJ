@@ -22,7 +22,7 @@ namespace Tower
         MonsterSpawnInfo[] _monsterSpawnInfo;
 
         List<MonsterView> _activatedMonsterViews = new List<MonsterView>();
-        Dictionary<float, MonsterView> _spawnTimeToMonsterView = new Dictionary<float, MonsterView>();
+        Dictionary<float, List<MonsterView>> _spawnTimeToMonsterViews = new Dictionary<float, List<MonsterView>>();
 
         PuzzleProjectileFactory _puzzleProjectileFactory;
 
@@ -39,7 +39,17 @@ namespace Tower
                 var monsterView = monsterViewFactory.CreateMonster(info.MonsterType, info.Lane);
                 monsterView.SetActive(false);
 
-                _spawnTimeToMonsterView.Add(info.Time, monsterView);
+                if (_spawnTimeToMonsterViews.ContainsKey(info.Time))
+                {
+                    _spawnTimeToMonsterViews[info.Time].Add(monsterView);
+                }
+                else
+                {
+                    var list = new List<MonsterView>();
+                    list.Add(monsterView);
+                    _spawnTimeToMonsterViews.Add(info.Time, list);
+                }
+
                 spawnMonsterViews[index] = monsterView;
             }
 
@@ -87,21 +97,25 @@ namespace Tower
         List<float> _removedTimes = new List<float>();
         void _activateMonster()
         {
-            foreach (var timeToView in _spawnTimeToMonsterView)
+            foreach (var timeToView in _spawnTimeToMonsterViews)
             {
                 var spawnTime = timeToView.Key;
-                var monsterView = timeToView.Value;
+                var monsterViews = timeToView.Value;
+
 
                 if (spawnTime < _timer)
                 {
-                    monsterView.SetActive(true);
-                    _activatedMonsterViews.Add(monsterView);
+                    foreach (var monsterView in monsterViews)
+                    {
+                        monsterView.SetActive(true);
+                        _activatedMonsterViews.Add(monsterView);
+                    }
                     _removedTimes.Add(spawnTime);
                 }
             }
             foreach (var time in _removedTimes)
             {
-                _spawnTimeToMonsterView.Remove(time);
+                _spawnTimeToMonsterViews.Remove(time);
             }
             _removedTimes.Clear();
         }

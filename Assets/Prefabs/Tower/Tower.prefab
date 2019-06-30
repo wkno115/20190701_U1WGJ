@@ -134,7 +134,7 @@ MonoBehaviour:
     _time: 2
   - _monsterType: 1
     _lane: 2
-    _time: 3
+    _time: 2
   - _monsterType: 2
     _lane: 4
     _time: 5
