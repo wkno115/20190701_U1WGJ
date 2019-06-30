@@ -47,16 +47,37 @@ namespace Puzzle.View
         /// <returns></returns>
         public IEnumerable SetColor(PieceColor[,] pieces)
         {
-            for (var column = 0; column < pieces.GetLength(0); column++)
+            var columns = pieces.GetLength(0);
+            var rows = pieces.GetLength(1);
+
+            //見える部分のピースの色を変える
+            for (var column = 0; column < columns; column++)
             {
-                for (var row = 0; row < pieces.GetLength(1); row++)
+                for (var row = 0; row < rows; row++)
                 {
                     _puzzlePieces[column + 1, row + 1].SetColor(pieces[column, row]);
                 }
                 yield return null;
             }
+
+            ArrayPrinter<PieceColor>.Print(pieces);
+            /*
             //演出用のピースの色を変える
-//            for(var column=0; )
+            //上下の行の色を変える．
+            for (var column = 0; column < columns; column++)
+            {
+                //演出用ピースは行列の上下左右の飛び出た部分である為，+1した列が対応する．
+                //同様に，行の最大値を入れても問題ない．
+                //また，上には見える部分の一番下を入れ，下はその逆になっているためやや煩雑になってしまった．
+                _puzzlePieces[column + 1, 0].SetColor(pieces[column, rows - 1]);
+                _puzzlePieces[column + 1, rows + 1].SetColor(pieces[column, 0]);
+            }
+            //左右の列の色を変える．
+            for (var row = 0; row < rows; row++)
+            {
+                _puzzlePieces[0, row + 1].SetColor(pieces[columns - 1, row]);
+                _puzzlePieces[columns + 1, row + 1].SetColor(pieces[0, row]);
+            }*/
         }
 
         /// <summary>
@@ -90,7 +111,7 @@ namespace Puzzle.View
                 for (var row = 0; row < rows; row++)
                 {
                     piece = Instantiate(_puzzlePiecePrefab, _transform);
-                    piece.transform.localPosition = _startPositionTransform.localPosition + new Vector3(row * piece.GetWidth(), column * -piece.GetHeight());
+                    piece.transform.localPosition = _startPositionTransform.localPosition + new Vector3(column * piece.GetWidth(), row * -piece.GetHeight());
                     _puzzlePieces[column, row] = piece;
                 }
                 yield return null;
