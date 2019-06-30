@@ -24,7 +24,7 @@ namespace Puzzle.View
         /// <summary>
         /// タップイベント発行者
         /// </summary>
-        readonly EventPublisher<Direction> _tapEventPublisher = new EventPublisher<Direction>();
+        readonly EventPublisher<Direction, byte, byte> _tapEventPublisher = new EventPublisher<Direction, byte, byte>();
 
         public byte Column { get; private set; }
         public byte Row { get; private set; }
@@ -34,14 +34,14 @@ namespace Puzzle.View
         /// </summary>
         /// <param name="onTap">紐づけ処理</param>
         /// <returns></returns>
-        public IDisposable SubscribeTap(Action<Direction> onTap) => _tapEventPublisher.Subscribe(onTap);
+        public IDisposable SubscribeTap(Action<Direction, byte, byte> onTap) => _tapEventPublisher.Subscribe(onTap);
 
         /// <summary>
         /// 初期化
         /// </summary>
         /// <param name="column"></param>
         /// <param name="row"></param>
-        public void Initialize(byte column,byte row)
+        public void Initialize(byte column, byte row)
         {
             Column = column;
             Row = row;
@@ -56,29 +56,35 @@ namespace Puzzle.View
         {
             var position = transform.InverseTransformDirection(eventData.pressPosition);
             position -= _rectTransform.position;
+            Direction? direction = null;
 
             //差分座標から，方向を決定．ど真ん中の時は方向を発行しない．
             if (Mathf.Abs(position.x) > Mathf.Abs(position.y))
             {
                 if (Mathf.Sign(position.x) > 0)
                 {
-                    _tapEventPublisher.Publish(Direction.Right);
+                    direction = Direction.Right;
                 }
                 else
                 {
-                    _tapEventPublisher.Publish(Direction.Left);
+                    direction = Direction.Left;
                 }
             }
             else if (Mathf.Abs(position.y) > Mathf.Abs(position.x))
             {
                 if (Mathf.Sign(position.y) > 0)
                 {
-                    _tapEventPublisher.Publish(Direction.Up);
+                    direction = Direction.Up;
                 }
                 else
                 {
-                    _tapEventPublisher.Publish(Direction.Down);
+                    direction = Direction.Down;
                 }
+            }
+
+            if (direction.HasValue)
+            {
+                _tapEventPublisher.Publish(direction.Value, Column, Row);
             }
         }
     }

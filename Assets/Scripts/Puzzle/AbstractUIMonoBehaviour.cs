@@ -8,6 +8,7 @@ namespace Puzzle
     {
         protected RectTransform _rectTransform;
 
+        public Transform Transform => _rectTransform;
         public float GetWidth() => _rectTransform.rect.width;
         public float GetHeight() => _rectTransform.rect.height;
 

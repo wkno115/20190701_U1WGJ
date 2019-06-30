@@ -46,6 +46,7 @@ namespace Puzzle
                         {
                             yield return null;
                         }
+                        animationProcess = null;
                     }
                     yield return null;
                 }

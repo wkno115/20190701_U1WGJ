@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using DG.Tweening;
 
 namespace Puzzle.View
 {
@@ -12,7 +13,7 @@ namespace Puzzle.View
         [SerializeField]
         PuzzlePieceComponent _puzzlePiecePrefab;
         [SerializeField]
-        float _moveTime = 0.4f;
+        float _moveTime = 1.0f;
 
         Transform _transform;
         PuzzlePieceComponent[,] _puzzlePieces;
@@ -41,7 +42,11 @@ namespace Puzzle.View
 
         public IEnumerable UpdatePieces((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate, PieceColor[,] nextPieces)
         {
-            yield return null;
+            foreach (var _ in _moveAnimation(directionAndCoordinate))
+            {
+                yield return null;
+            }            
+            _resetPosition();
             _setColor(nextPieces);
         }
         /// <summary>
@@ -53,6 +58,23 @@ namespace Puzzle.View
             yield return null;
         }
 
+        /// <summary>
+        /// ポジションをリセット
+        /// </summary>
+        void _resetPosition()
+        {
+            //TODO:最適化
+            var columns = _puzzlePieces.GetLength(0);
+            var rows = _puzzlePieces.GetLength(1);
+
+            for (var column = 0; column < columns; column++)
+            {
+                for (var row = 0; row < rows; row++)
+                {
+                    _puzzlePieces[column, row].Transform.localPosition = _startPositionTransform.localPosition + new Vector3(column * _puzzlePieces[column, row].GetWidth(), row * -_puzzlePieces[column, row].GetHeight());
+                }
+            }
+        }
         /// <summary>
         /// ピースに色をセット
         /// </summary>
@@ -100,24 +122,33 @@ namespace Puzzle.View
         {
             //移動を行う．
             var targetPieces = new List<PuzzlePieceComponent>();
-            var distance = 0f;
+            var distance = new Vector3(0, 0, 0);
             if (directionAndCoordinate.direction == TapSquareComponent.Direction.Up || directionAndCoordinate.direction == TapSquareComponent.Direction.Down)
             {
                 for (var row = 0; row < _puzzlePieces.GetLength(1); row++)
                 {
-                    targetPieces.Add(_puzzlePieces[directionAndCoordinate.column, row]);
+                    targetPieces.Add(_puzzlePieces[directionAndCoordinate.column + 1, row]);
                 }
-                distance = directionAndCoordinate.direction == TapSquareComponent.Direction.Up ? _puzzlePiecePrefab.GetHeight() : -_puzzlePiecePrefab.GetHeight();
+                distance.Set(0, directionAndCoordinate.direction == TapSquareComponent.Direction.Up ? targetPieces[0].GetHeight() : -targetPieces[0].GetHeight(), 0);
             }
             else
             {
                 for (var column = 0; column < _puzzlePieces.GetLength(0); column++)
                 {
-                    targetPieces.Add(_puzzlePieces[column, directionAndCoordinate.row]);
+                    targetPieces.Add(_puzzlePieces[column, directionAndCoordinate.row + 1]);
                 }
-                distance = directionAndCoordinate.direction == TapSquareComponent.Direction.Up ? _puzzlePiecePrefab.GetWidth() : -_puzzlePiecePrefab.GetWidth();
+                distance.Set(directionAndCoordinate.direction == TapSquareComponent.Direction.Right ? targetPieces[0].GetWidth() : -targetPieces[0].GetWidth(), 0, 0);
             }
-            yield return null;
+
+            var isComplete = false;
+            foreach (var piece in targetPieces)
+            {
+                piece.Transform.DOLocalMove(piece.Transform.localPosition + distance, _moveTime).OnComplete(() => isComplete = true);
+            }
+            while (!isComplete)
+            {
+                yield return null;
+            }
         }
         /// <summary>
         /// パズルピースをインスタンス化．
@@ -133,7 +164,7 @@ namespace Puzzle.View
                 for (var row = 0; row < rows; row++)
                 {
                     piece = Instantiate(_puzzlePiecePrefab, _transform);
-                    piece.transform.localPosition = _startPositionTransform.localPosition + new Vector3(column * piece.GetWidth(), row * -piece.GetHeight());
+                    piece.Transform.localPosition = _startPositionTransform.localPosition + new Vector3(column * piece.GetWidth(), row * -piece.GetHeight());
                     _puzzlePieces[column, row] = piece;
                 }
                 yield return null;

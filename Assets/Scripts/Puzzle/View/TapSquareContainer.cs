@@ -68,12 +68,12 @@ namespace Puzzle.View
                 {
                     square = Instantiate(_squarePrefab, _transform);
                     square.Initialize(column, row);
-                    square.transform.localPosition = _startPositionTransform.localPosition + new Vector3(row * square.GetWidth(), column * -square.GetHeight());
-                    _disposables.Add(square.SubscribeTap(direction =>
+                    square.transform.localPosition = _startPositionTransform.localPosition + new Vector3(column * square.GetWidth(), row * -square.GetHeight());
+                    _disposables.Add(square.SubscribeTap((direction, sCol, sRow) =>
                     {
                         if (IsActive)
                         {
-                            _tapEventPublisher.Publish((direction, square.Column, square.Row));
+                            _tapEventPublisher.Publish((direction, sCol, sRow));
                         }
                     }));
                 }
