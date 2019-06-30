@@ -1,10 +1,7 @@
 ﻿using Pyke;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Puzzle.View
 {
@@ -24,7 +21,13 @@ namespace Puzzle.View
             Right,
         }
 
+        /// <summary>
+        /// タップイベント発行者
+        /// </summary>
         readonly EventPublisher<Direction> _tapEventPublisher = new EventPublisher<Direction>();
+
+        public byte Column { get; private set; }
+        public byte Row { get; private set; }
 
         /// <summary>
         /// タップを購読する
@@ -32,6 +35,17 @@ namespace Puzzle.View
         /// <param name="onTap">紐づけ処理</param>
         /// <returns></returns>
         public IDisposable SubscribeTap(Action<Direction> onTap) => _tapEventPublisher.Subscribe(onTap);
+
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        /// <param name="column"></param>
+        /// <param name="row"></param>
+        public void Initialize(byte column,byte row)
+        {
+            Column = column;
+            Row = row;
+        }
 
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace Puzzle.View
         [SerializeField]
         Image _image;
 
-        public void Initialize(PieceColor color)
+        public void SetColor(PieceColor color)
         {
             switch (color)
             {

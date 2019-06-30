@@ -22,7 +22,7 @@ namespace Puzzle.View
         [SerializeField]
         TapSquareComponent _squarePrefab;
 
-        readonly EventPublisher<(TapSquareComponent.Direction direction, int column, int row)> _tapEventPublisher = new EventPublisher<(TapSquareComponent.Direction direction, int column, int row)>();
+        readonly EventPublisher<(TapSquareComponent.Direction direction, byte column, byte row)> _tapEventPublisher = new EventPublisher<(TapSquareComponent.Direction direction, byte column, byte row)>();
 
         /// <summary>
         /// 自 Tranform
@@ -37,13 +37,17 @@ namespace Puzzle.View
         /// </summary>
         CompositeDisposable _disposables = new CompositeDisposable();
 
+        /// <summary>
+        /// くそ雑有効状態
+        /// </summary>
+        public bool IsActive = true;
 
         /// <summary>
         /// タップを購読
         /// </summary>
         /// <param name="onTap"></param>
         /// <returns></returns>
-        public IDisposable SubscribeTap(Action<(TapSquareComponent.Direction direction, int column, int row)> onTap) => _tapEventPublisher.Subscribe(onTap);
+        public IDisposable SubscribeTap(Action<(TapSquareComponent.Direction direction, byte column, byte row)> onTap) => _tapEventPublisher.Subscribe(onTap);
 
         private void Awake()
         {
@@ -53,18 +57,25 @@ namespace Puzzle.View
         /// <summary>
         /// マスをインスタンス化．
         /// </summary>
-        /// <returns></returns>
-        public IEnumerable InstantiateSquares(int columns, int rows)
+        /// <returns>処理中</returns>
+        public IEnumerable InstantiateSquares(byte columns, byte rows)
         {
             _disposables.Dispose();
             TapSquareComponent square;
-            for (var column = 0; column < columns; column++)
+            for (byte column = 0; column < columns; column++)
             {
-                for (var row = 0; row < rows; row++)
+                for (byte row = 0; row < rows; row++)
                 {
                     square = Instantiate(_squarePrefab, _transform);
+                    square.Initialize(column, row);
                     square.transform.localPosition = _startPositionTransform.localPosition + new Vector3(row * square.GetWidth(), column * -square.GetHeight());
-                    _disposables.Add(square.SubscribeTap(direction => _tapEventPublisher.Publish((direction, column, row))));
+                    _disposables.Add(square.SubscribeTap(direction =>
+                    {
+                        if (IsActive)
+                        {
+                            _tapEventPublisher.Publish((direction, square.Column, square.Row));
+                        }
+                    }));
                 }
                 yield return null;
             }

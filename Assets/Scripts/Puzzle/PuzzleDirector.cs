@@ -13,8 +13,8 @@ namespace Puzzle
     /// </summary>
     public class PuzzleDirector : MonoBehaviour
     {
-        static int COLUMNS = 4;
-        static int ROWS = 4;
+        static byte COLUMNS = 4;
+        static byte ROWS = 4;
 
         [SerializeField]
         PuzzleUI _ui;
@@ -40,7 +40,11 @@ namespace Puzzle
         public IEnumerable Initialize()
         {
             var domain = new PuzzleDomain(COLUMNS, ROWS);
-            foreach (var _ in _ui.Initialize(COLUMNS, ROWS))
+            foreach(var _ in domain.Initialize())
+            {
+                yield return null;
+            }
+            foreach (var _ in _ui.Initialize(domain.GetAllPieces()))
             {
                 yield return null;
             }

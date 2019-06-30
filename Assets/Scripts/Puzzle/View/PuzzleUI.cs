@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,20 +19,57 @@ namespace Puzzle.View
         /// </summary>
         [SerializeField]
         PuzzlePieceContainer _puzzlePieceContainer;
+        /// <summary>
+        /// 入力を扱うオブジェクト
+        /// </summary>
+        [SerializeField]
+        InputHandlerComponent _inputHandlerComponent;
 
         public TapSquareContainer GetTapSquareContainer() => _tapSquareContainer;
         public PuzzlePieceContainer GetPuzzleContainer() => _puzzlePieceContainer;
 
-        public IEnumerable Initialize(int columns, int rows)
+        /// <summary>
+        /// キー入力を購読する．
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public IDisposable SubscribeInputKey(Action<KeyCode> action) => _inputHandlerComponent.SubscribeInputKey(action);
+
+
+        public IEnumerable Initialize(PieceColor[,] pieces)
         {
-            foreach (var _ in _tapSquareContainer.InstantiateSquares(columns, rows))
+            foreach (var _ in _tapSquareContainer.InstantiateSquares((byte)pieces.GetLength(0), (byte)pieces.GetLength(1)))
             {
                 yield return null;
             }
-            foreach(var _ in _puzzlePieceContainer.InstantiatePieces(columns,rows))
+            foreach (var _ in _puzzlePieceContainer.Initialize(pieces))
             {
                 yield return null;
             }
+        }
+        /// <summary>
+        /// 移動
+        /// </summary>
+        /// <param name="directionAndCoordinate"></param>
+        /// <returns></returns>
+        public IEnumerable MoveAnimation((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate)
+        {
+            _setInputActive(false);
+            foreach (var _ in _puzzlePieceContainer.MoveAnimation(directionAndCoordinate))
+            {
+                yield return null;
+            }
+            _setInputActive(true);
+        }
+
+        /// <summary>
+        /// 入力の有効化セット
+        /// </summary>
+        /// <param name="isActivate"></param>
+        void _setInputActive(bool isActivate)
+        {
+            _inputHandlerComponent.IsActive = isActivate;
+            _tapSquareContainer.IsActive = isActivate;
         }
     }
 }
