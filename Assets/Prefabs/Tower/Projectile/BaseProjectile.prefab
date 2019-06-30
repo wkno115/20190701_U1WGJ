@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 2599039636339604442}
   - component: {fileID: 5078806985236016007}
   - component: {fileID: 1503083287983632589}
-  - component: {fileID: 9142655945977486727}
-  - component: {fileID: 8177968546845998120}
   - component: {fileID: 992385927405839977}
+  - component: {fileID: 8177968546845998120}
+  - component: {fileID: 9142655945977486727}
+  - component: {fileID: 481182879253601930}
   m_Layer: 0
-  m_Name: TestProjectile
+  m_Name: BaseProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,36 +95,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9142655945977486727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6651286710476341680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 695098e8d15712b4287f85f220446cea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _detectCollisionHandler: {fileID: 8177968546845998120}
-  _onStartEffect: {fileID: 0}
-  _onDetectEffect: {fileID: 0}
-  _detectStartTime: 0
-  _detectEndTime: 100
---- !u!114 &8177968546845998120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6651286710476341680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb67db6907a23624994868cb0f04ed18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shouldDebug: 0
 --- !u!114 &992385927405839977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,3 +112,47 @@ MonoBehaviour:
     _pieceColor: 0
     _attackPower: 100
     _movementSpeed: 100
+--- !u!114 &8177968546845998120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6651286710476341680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb67db6907a23624994868cb0f04ed18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shouldDebug: 0
+--- !u!114 &9142655945977486727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6651286710476341680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695098e8d15712b4287f85f220446cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _detectCollisionHandler: {fileID: 8177968546845998120}
+  _onStartEffect: {fileID: 0}
+  _onDetectEffect: {fileID: 481182879253601930}
+  _detectStartTime: 0
+  _detectEndTime: 100
+--- !u!114 &481182879253601930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6651286710476341680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9f45e4c257bff40aff998f8fd219f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 1567762759112534887, guid: 2ea34feb827f4c541b87e2c09de65c56,
+    type: 3}

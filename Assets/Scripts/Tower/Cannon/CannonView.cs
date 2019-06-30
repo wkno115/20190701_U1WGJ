@@ -7,10 +7,13 @@ namespace Tower.Cannon
 {
     public class CannonView : AbstractView
     {
+        [SerializeField]
+        ParticleSystemHandleComponent _onFireEffect;
         public IEnumerable<MonsterView> Shoot(ProjectileView projectile)
         {
             projectile.transform.SetParent(transform);
             projectile.transform.localPosition = Vector3.zero;
+            _onFireEffect.Play();
             foreach (var hitTarget in projectile.Shoot<MonsterView>(Vector3.forward, 10f))
             {
                 yield return hitTarget;
