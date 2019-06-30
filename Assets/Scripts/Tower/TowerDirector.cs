@@ -73,15 +73,15 @@ namespace Tower
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                StartCoroutine(Shoot(PieceColor.Red, 2));
+                StartCoroutine(Shoot(PieceColor.Blue, 2));
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                StartCoroutine(Shoot(PieceColor.Red, 3));
+                StartCoroutine(Shoot(PieceColor.Yellow, 3));
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                StartCoroutine(Shoot(PieceColor.Red, 4));
+                StartCoroutine(Shoot(PieceColor.Green, 4));
             }
         }
         List<float> _removedTimes = new List<float>();

@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _puzzleProjectileViews:
-  - {fileID: 992385927405839977, guid: 8791345fb50952447956e16816a3fafd, type: 3}
+  - {fileID: 992385927405839977, guid: 4de351e0905f21444bf66064a7dcda6a, type: 3}
+  - {fileID: 992385927405839977, guid: 9ca41b5684423874eb4afe955f06e606, type: 3}
+  - {fileID: 992385927405839977, guid: e476701557884f249823a28423ec73c1, type: 3}
+  - {fileID: 992385927405839977, guid: b02d74c6415dc654db462f0c7dcd0945, type: 3}
 --- !u!1 &2862331714964839669
 GameObject:
   m_ObjectHideFlags: 0
