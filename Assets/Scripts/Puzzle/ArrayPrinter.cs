@@ -13,7 +13,8 @@ namespace Puzzle
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    result += array[i, j].ToString() + ",";
+                    //列業で作った間抜けの為の
+                    result += array[j, i].ToString() + ",";
                 }
                 result += "\n ";
             }

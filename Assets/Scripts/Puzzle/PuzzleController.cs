@@ -36,7 +36,7 @@ namespace Puzzle
 
             using (_ui.GetTapSquareContainer().SubscribeTap(_domain.ChangePieces))
             using (_ui.SubscribeInputKey(_ => _domain.Result()))
-            using (_domain.SubscribeMove(directionAndCoordinate => animationProcess = _ui.MoveAnimation(directionAndCoordinate)))
+            using (_domain.SubscribeUpdatePieces(directionAndCoordinate => animationProcess = _ui.UpdatePiecesProcess(directionAndCoordinate, _domain.GetAllPieces())))
             {
                 while (true)
                 {

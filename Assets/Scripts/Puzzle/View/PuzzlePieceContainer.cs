@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Puzzle.View
 {
@@ -35,17 +36,29 @@ namespace Puzzle.View
             {
                 yield return null;
             }
-            foreach (var _ in SetColor(pieces))
-            {
-                yield return null;
-            }
+            _setColor(pieces);
         }
+
+        public IEnumerable UpdatePieces((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate, PieceColor[,] nextPieces)
+        {
+            yield return null;
+            _setColor(nextPieces);
+        }
+        /// <summary>
+        /// 結果処理
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable ResultProcess(PieceColor[,] nextPieces)
+        {
+            yield return null;
+        }
+
         /// <summary>
         /// ピースに色をセット
         /// </summary>
         /// <param name="pieces">ピースカラー</param>
         /// <returns></returns>
-        public IEnumerable SetColor(PieceColor[,] pieces)
+        void _setColor(PieceColor[,] pieces)
         {
             var columns = pieces.GetLength(0);
             var rows = pieces.GetLength(1);
@@ -57,11 +70,10 @@ namespace Puzzle.View
                 {
                     _puzzlePieces[column + 1, row + 1].SetColor(pieces[column, row]);
                 }
-                yield return null;
             }
 
             ArrayPrinter<PieceColor>.Print(pieces);
-            /*
+
             //演出用のピースの色を変える
             //上下の行の色を変える．
             for (var column = 0; column < columns; column++)
@@ -77,32 +89,42 @@ namespace Puzzle.View
             {
                 _puzzlePieces[0, row + 1].SetColor(pieces[columns - 1, row]);
                 _puzzlePieces[columns + 1, row + 1].SetColor(pieces[0, row]);
-            }*/
+            }
         }
-
         /// <summary>
         /// 移動アニメーション
         /// </summary>
         /// <param name="directionAndCoordinate"></param>
         /// <returns></returns>
-        public IEnumerable MoveAnimation((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate)
+        IEnumerable _moveAnimation((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate)
         {
             //移動を行う．
+            var targetPieces = new List<PuzzlePieceComponent>();
+            var distance = 0f;
+            if (directionAndCoordinate.direction == TapSquareComponent.Direction.Up || directionAndCoordinate.direction == TapSquareComponent.Direction.Down)
+            {
+                for (var row = 0; row < _puzzlePieces.GetLength(1); row++)
+                {
+                    targetPieces.Add(_puzzlePieces[directionAndCoordinate.column, row]);
+                }
+                distance = directionAndCoordinate.direction == TapSquareComponent.Direction.Up ? _puzzlePiecePrefab.GetHeight() : -_puzzlePiecePrefab.GetHeight();
+            }
+            else
+            {
+                for (var column = 0; column < _puzzlePieces.GetLength(0); column++)
+                {
+                    targetPieces.Add(_puzzlePieces[column, directionAndCoordinate.row]);
+                }
+                distance = directionAndCoordinate.direction == TapSquareComponent.Direction.Up ? _puzzlePiecePrefab.GetWidth() : -_puzzlePiecePrefab.GetWidth();
+            }
             yield return null;
         }
-        /// <summary>
-        /// 結果アニメーション
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable ResultAnimation()
-        {
-            yield return null;
-        }
-
         /// <summary>
         /// パズルピースをインスタンス化．
         /// </summary>
-        /// <returns></returns>
+        /// <param name="columns">列数</param>
+        /// <param name="rows">行数</param>
+        /// <returns>処理中</returns>
         IEnumerable _instantiatePieces(byte columns, byte rows)
         {
             PuzzlePieceComponent piece;
