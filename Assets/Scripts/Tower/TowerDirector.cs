@@ -45,9 +45,7 @@ namespace Tower
                 }
                 else
                 {
-                    var list = new List<MonsterView>();
-                    list.Add(monsterView);
-                    _spawnTimeToMonsterViews.Add(info.Time, list);
+                    _spawnTimeToMonsterViews.Add(info.Time, new List<MonsterView> { monsterView });
                 }
 
                 spawnMonsterViews[index] = monsterView;
@@ -101,7 +99,6 @@ namespace Tower
             {
                 var spawnTime = timeToView.Key;
                 var monsterViews = timeToView.Value;
-
 
                 if (spawnTime < _timer)
                 {
