@@ -36,13 +36,13 @@ namespace Puzzle.View
         public IDisposable SubscribeInputKey(Action<KeyCode> action) => _inputHandlerComponent.SubscribeInputKey(action);
 
 
-        public IEnumerable Initialize(PieceColor[,] pieces)
+        public IEnumerable Initialize(PieceColor[,] initialPieces)
         {
-            foreach (var _ in _tapSquareContainer.InstantiateSquares((byte)pieces.GetLength(0), (byte)pieces.GetLength(1)))
+            foreach (var _ in _tapSquareContainer.InstantiateSquares((byte)initialPieces.GetLength(0), (byte)initialPieces.GetLength(1)))
             {
                 yield return null;
             }
-            foreach (var _ in _puzzlePieceContainer.Initialize(pieces))
+            foreach (var _ in _puzzlePieceContainer.Initialize(initialPieces))
             {
                 yield return null;
             }
@@ -60,6 +60,18 @@ namespace Puzzle.View
                 yield return null;
             }
             _setInputActive(true);
+        }
+        /// <summary>
+        /// 結果処理
+        /// </summary>
+        /// <param name="nextPieces">次のピース群</param>
+        /// <returns></returns>
+        public IEnumerable ResultProcess(PieceColor[,] nextPieces)
+        {
+            foreach (var _ in _puzzlePieceContainer.ResultProcess(nextPieces))
+            {
+                yield return null;
+            }
         }
 
         /// <summary>

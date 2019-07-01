@@ -23,20 +23,24 @@ namespace Puzzle
             _domain = domain;
         }
 
-        public IDisposable SubscribeResult(Action<PuzzleSphere[]> action) => _domain.SubscribeResult(action);
-
         public IEnumerable Initialize()
         {
             yield return null;
         }
 
-        public IEnumerable Run()
+        public IEnumerable<PuzzleSphere[]> Run()
         {
             IEnumerable animationProcess = null;
+            PuzzleSphere[] resultSphere = null;
 
             using (_ui.GetTapSquareContainer().SubscribeTap(_domain.ChangePieces))
             using (_ui.SubscribeInputKey(_ => _domain.Result()))
             using (_domain.SubscribeUpdatePieces(directionAndCoordinate => animationProcess = _ui.UpdatePiecesProcess(directionAndCoordinate, _domain.GetAllPieces())))
+            using (_domain.SubscribeResult(result =>
+            {
+                animationProcess = _ui.ResultProcess(_domain.GetAllPieces());
+                resultSphere = result;
+            }))
             {
                 while (true)
                 {
@@ -47,9 +51,14 @@ namespace Puzzle
                             yield return null;
                         }
                         animationProcess = null;
+                        if (resultSphere != null)
+                        {
+                            break;
+                        }
                     }
                     yield return null;
                 }
+                yield return resultSphere;
             }
         }
     }

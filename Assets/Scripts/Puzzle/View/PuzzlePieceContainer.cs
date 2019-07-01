@@ -13,7 +13,7 @@ namespace Puzzle.View
         [SerializeField]
         PuzzlePieceComponent _puzzlePiecePrefab;
         [SerializeField]
-        float _moveTime = 1.0f;
+        float _moveTime = 0.5f;
 
         Transform _transform;
         PuzzlePieceComponent[,] _puzzlePieces;
@@ -45,17 +45,47 @@ namespace Puzzle.View
             foreach (var _ in _moveAnimation(directionAndCoordinate))
             {
                 yield return null;
-            }            
+            }
             _resetPosition();
             _setColor(nextPieces);
         }
         /// <summary>
         /// 結果処理
         /// </summary>
+        /// <param name="nextPieces"></param>
         /// <returns></returns>
         public IEnumerable ResultProcess(PieceColor[,] nextPieces)
         {
-            yield return null;
+            //TODO:もっときれいに
+
+            var columns = _puzzlePieces.GetLength(0);
+            var rows = _puzzlePieces.GetLength(1);
+            var isComplete = false;
+
+            for (var column = 0; column < columns; column++)
+            {
+                for (var row = 0; row < rows; row++)
+                {
+                    _puzzlePieces[column, row].Transform.DOScale(0, 1f).OnComplete(() => isComplete = true);
+                }
+            }
+            while (!isComplete)
+            {
+                yield return null;
+            }
+            _setColor(nextPieces);
+            isComplete = false;
+            for (var column = 0; column < columns; column++)
+            {
+                for (var row = 0; row < rows; row++)
+                {
+                    _puzzlePieces[column, row].Transform.DOScale(1, 1f).OnComplete(() => isComplete = true);
+                }
+            }
+            while (!isComplete)
+            {
+                yield return null;
+            }
         }
 
         /// <summary>

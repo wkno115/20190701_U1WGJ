@@ -229,7 +229,7 @@ MonoBehaviour:
   _startPositionTransform: {fileID: 3881336632779857648}
   _puzzlePiecePrefab: {fileID: 7624396099527027728, guid: 8fd983189aa723f4b91616d013d4577a,
     type: 3}
-  _moveTime: 1
+  _moveTime: 0.5
 --- !u!1 &3881336631284259176
 GameObject:
   m_ObjectHideFlags: 0
