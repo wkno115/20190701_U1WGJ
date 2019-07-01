@@ -18,8 +18,6 @@ namespace Tower
         LaneViewContainer _laneViewContainer;
         [SerializeField]
         PuzzleProjectileViewContainer _puzzleProjectileViewContainer;
-        [SerializeField]
-        MonsterSpawnInfo[] _monsterSpawnInfo;
 
         List<MonsterView> _activatedMonsterViews = new List<MonsterView>();
         Dictionary<float, List<MonsterView>> _spawnTimeToMonsterViews = new Dictionary<float, List<MonsterView>>();
@@ -34,8 +32,22 @@ namespace Tower
             var monsterViewFactory = new MonsterViewFactory(_monsterViewContainer, _laneViewContainer);
             _puzzleProjectileFactory = new PuzzleProjectileFactory(_puzzleProjectileViewContainer);
 
-            var spawnMonsterViews = new MonsterView[_monsterSpawnInfo.Length];
-            foreach (var (info, index) in _monsterSpawnInfo.Index())
+            var monsterSpawnInfo = new MonsterSpawnInfo[100];
+            var spawnTimeDispersionMax = 5;
+            var spawnTimeDispersionMin = -5;
+            for (int i = 0; i < monsterSpawnInfo.Length; i++)
+            {
+                var spawnLane = (byte)RandomValueFactory.CreateRandomValue(1, 4);
+                var spawnTime = RandomValueFactory.CreateRandomValue(i + spawnTimeDispersionMin, i + spawnTimeDispersionMax);
+                if (spawnTime < 0)
+                {
+                    spawnTime = 0;
+                }
+                monsterSpawnInfo[i] = new MonsterSpawnInfo(MonsterType.ghost, spawnLane, spawnTime);
+            }
+
+            var spawnMonsterViews = new MonsterView[monsterSpawnInfo.Length];
+            foreach (var (info, index) in monsterSpawnInfo.Index())
             {
                 var monsterView = monsterViewFactory.CreateMonster(info.MonsterType, info.Lane);
                 monsterView.SetActive(false);

@@ -13,6 +13,13 @@ namespace Tower.Monster
         [SerializeField]
         float _time;
 
+        public MonsterSpawnInfo(MonsterType monsterType, byte lane, float time)
+        {
+            _monsterType = monsterType;
+            _lane = lane;
+            _time = time;
+        }
+
         public MonsterType MonsterType => _monsterType;
         public byte Lane => _lane;
         public float Time => _time;
