@@ -12,19 +12,12 @@ namespace Pyke
 
         protected virtual void Awake()
         {
-            _setPointerEventPublisher();
-        }
-        void _setPointerEventPublisher()
-        {
             var pointerEventPublisher = GetComponentInChildren<PointerEventPublisher>();
-            if (pointerEventPublisher == null)
-            {
-                _pointerEventPublisher = gameObject.AddComponent<PointerEventPublisher>();
-            }
-            else
-            {
-                _pointerEventPublisher = pointerEventPublisher;
-            }
+            _pointerEventPublisher = pointerEventPublisher ?? gameObject.AddComponent<PointerEventPublisher>();
+        }
+        protected virtual void OnDestroy()
+        {
+
         }
 
         public virtual void Warp(Vector3 targetPosition)
@@ -35,7 +28,7 @@ namespace Pyke
         {
             gameObject.SetActive(isActive);
         }
-        public void Destroy()
+        public virtual void Dead()
         {
             Destroy(gameObject);
         }

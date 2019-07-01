@@ -27,6 +27,7 @@ namespace Tower
         PuzzleProjectileFactory _puzzleProjectileFactory;
 
         float _timer;
+        bool _shouldContinue;
 
         IEnumerator Start()
         {
@@ -51,11 +52,11 @@ namespace Tower
                 spawnMonsterViews[index] = monsterView;
             }
 
-            var shouldContinue = true;
-            using (_laneViewContainer.DeadLineView.SubscribeMonsterViewEnter(monsterView => shouldContinue = false))
+            _shouldContinue = true;
+            using (_laneViewContainer.DeadLineView.SubscribeMonsterViewEnter(monsterView => _shouldContinue = false))
             using (new DisposeComposer(spawnMonsterViews.Select(view => view.SubscribeDead(_onMonsterDead)).ToArray()))
             {
-                while (shouldContinue)
+                while (_shouldContinue)
                 {
                     _timer += Time.deltaTime;
 
@@ -131,6 +132,10 @@ namespace Tower
             var puzzleProjectileView = _puzzleProjectileFactory.CreatePuzzleProjectile(pieceColor);
             foreach (var hitTarget in cannonView.Shoot(puzzleProjectileView))
             {
+                if (!_shouldContinue)
+                {
+                    break;
+                }
                 if (hitTarget != null)
                 {
                     var damage = puzzleProjectileView.AttackPower;
@@ -143,7 +148,7 @@ namespace Tower
                 }
                 yield return null;
             }
-            Destroy(puzzleProjectileView.gameObject);
+            puzzleProjectileView.Dead();
         }
     }
 }

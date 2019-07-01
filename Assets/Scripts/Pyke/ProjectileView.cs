@@ -9,6 +9,8 @@ namespace Pyke
     {
         [SerializeField]
         float _deadTime;
+        [SerializeField]
+        ParticleSystemHandleComponent _onDeadVe;
 
         DetectView _detectView;
 
@@ -29,7 +31,7 @@ namespace Pyke
                 yield return detectingResult;
             }
 
-            Destroy(gameObject);
+            Dead();
         }
 
         public IEnumerable<TTargetViewComponent> ShootToView<TTargetViewComponent>(IUnityView view, float speed) where TTargetViewComponent : IUnityView
@@ -44,10 +46,10 @@ namespace Pyke
                 yield return detectingResult;
             }
 
-            Destroy(gameObject);
+            Dead();
         }
 
-        public IEnumerable<TTargetViewComponent> ShootToViewAndChase<TTargetViewComponent>(IUnityView view, float speed) where TTargetViewComponent : IUnityView
+        public IEnumerable<TTargetViewComponent> Chase<TTargetViewComponent>(IUnityView view, float speed) where TTargetViewComponent : IUnityView
         {
             _detectView.SetDetectTime(0f, _deadTime);
 
@@ -55,11 +57,18 @@ namespace Pyke
             {
                 var angleOfFire = (view.Position - transform.position).normalized;
                 transform.position += angleOfFire * speed * Time.deltaTime;
-                transform.LookAt(view.Position);
+                transform.localRotation = Quaternion.LookRotation(angleOfFire);
                 yield return detectingResult;
             }
 
-            Destroy(gameObject);
+            Dead();
+        }
+
+        public override void Dead()
+        {
+            _onDeadVe?.Play(transform.position);
+
+            base.Dead();
         }
     }
 }

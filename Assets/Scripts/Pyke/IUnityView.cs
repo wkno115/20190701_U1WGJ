@@ -10,7 +10,7 @@ namespace Pyke
 
         void Warp(Vector3 position);
         void SetActive(bool isActive);
-        void Destroy();
+        void Dead();
 
         IDisposable SubscribeLeftClick(Action<IUnityView> action);
         IDisposable SubscribeRightClick(Action<IUnityView> action);

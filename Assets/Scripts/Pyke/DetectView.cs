@@ -9,9 +9,10 @@ namespace Pyke
         CollisionHandleComponent _detectCollisionHandler;
 
         [SerializeField]
-        ParticleSystemHandleComponent _onStartEffect;
-        [SerializeField]
         ParticleSystemHandleComponent _onDetectEffect;
+        [SerializeField]
+        AudioSourceHandleComponent _onDetectSound;
+
 
         [SerializeField]
         float _detectStartTime;
@@ -26,11 +27,6 @@ namespace Pyke
 
         public IEnumerable<TTargetViewComponent> Detect<TTargetViewComponent>() where TTargetViewComponent : IUnityView
         {
-            if (_onStartEffect != null)
-            {
-                _onStartEffect.Play();
-            }
-
             var attackedTargets = new List<TTargetViewComponent>();
             var timer = 0f;
             while (timer < _detectEndTime)
@@ -47,10 +43,8 @@ namespace Pyke
                         var target = collider.GetComponent<TTargetViewComponent>();
                         if (target != null && !attackedTargets.Contains(target))
                         {
-                            if (_onDetectEffect != null)
-                            {
-                                _onDetectEffect.Play(target.Position);
-                            }
+                            _onDetectEffect?.Play(target.Position);
+                            _onDetectSound?.Play();
 
                             attackedTargets.Add(target);
                             yield return target;
