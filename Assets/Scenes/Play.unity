@@ -554,6 +554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 554595849}
+  - component: {fileID: 554595850}
   m_Layer: 0
   m_Name: PlaySubsceneDirector
   m_TagString: Untagged
@@ -575,6 +576,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &554595850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554595848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 091adc66b9795134aa819db94fa96726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _puzzleDirector: {fileID: 2007484784}
+  _towerDirector: {fileID: 786756554}
+--- !u!114 &786756554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7924043683005828758, guid: e9a5583b6c159c74ebee8b12da936fdf,
+    type: 3}
+  m_PrefabInstance: {fileID: 49732568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65cd40683f7dfde4eb51291e1e88dd8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1560682611 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3881336632933085310, guid: 61a209ad8810a394a9556c132f6430bd,

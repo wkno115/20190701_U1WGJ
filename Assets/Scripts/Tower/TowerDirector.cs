@@ -85,7 +85,7 @@ namespace Tower
                     yield return null;
                 }
             }
-            _gameFinishEventPublisher.Publish();
+            _gameFinishEventPublisher.Publish(_timer, 0);
         }
 
         void _onMonsterDead(MonsterView monsterView)

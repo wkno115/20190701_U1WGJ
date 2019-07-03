@@ -20,6 +20,14 @@ namespace Play
                 yield return null;
             }
             StartCoroutine(_towerDirector.Run());
+
+            PlayResult? result = null;
+            foreach (var element in Run())
+            {
+                result = element;
+                yield return null;
+            }
+            Debug.Log(result);
         }
 
         IEnumerable<PlayResult?> Run()
@@ -43,6 +51,7 @@ namespace Play
                     {
                         StartCoroutine(_towerDirector.Shoot(sphere.Color, sphere.Lane));
                     }
+                    yield return null;
                 }
             }
             yield return playResult;

@@ -50,7 +50,7 @@ namespace Puzzle.Model
                 for (byte row = 0; row < _pieces.GetLength(1); row++)
                 {
                     //列が1ずれると，個数としては1行分ずれる．
-                    result[column * _pieces.GetLength(1) + row] = new PuzzleSphere(column, _pieces[column, row], 1);
+                    result[column * _pieces.GetLength(1) + row] = new PuzzleSphere((byte)(column + 1), _pieces[column, row], 1);
                 }
             }
             return result;
@@ -101,7 +101,7 @@ namespace Puzzle.Model
                 _pieces[column, count] = _pieces[column, count + diff];
                 count += diff;
             }
-            _pieces[column, count ] = temp;
+            _pieces[column, count] = temp;
         }
         /// <summary>
         /// 行移動
@@ -117,7 +117,7 @@ namespace Puzzle.Model
             var end = isRight ? 0 : _pieces.GetLength(0) - 1;
             var temp = _pieces[count, row];
 
-            while (isRight ? count > end : count  < end)
+            while (isRight ? count > end : count < end)
             {
                 _pieces[count, row] = _pieces[count + diff, row];
                 count += diff;
