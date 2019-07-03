@@ -1,5 +1,6 @@
 ﻿using Puzzle;
 using Pyke;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace Tower
         [SerializeField]
         PuzzleProjectileViewContainer _puzzleProjectileViewContainer;
 
+        readonly EventPublisher<float, int> _gameFinishEventPublisher = new EventPublisher<float, int>();
+
         List<MonsterView> _activatedMonsterViews = new List<MonsterView>();
         Dictionary<float, List<MonsterView>> _spawnTimeToMonsterViews = new Dictionary<float, List<MonsterView>>();
 
@@ -27,7 +30,9 @@ namespace Tower
         float _timer;
         bool _shouldContinue;
 
-        IEnumerator Start()
+        public IDisposable SubscribeFinish(Action<float, int> onFinish) => _gameFinishEventPublisher.Subscribe(onFinish);
+
+        public IEnumerator Run()
         {
             var monsterViewFactory = new MonsterViewFactory(_monsterViewContainer, _laneViewContainer);
             _puzzleProjectileFactory = new PuzzleProjectileFactory(_puzzleProjectileViewContainer);
@@ -75,12 +80,12 @@ namespace Tower
 
                     _testProjectiles();
                     _activateMonster();
-                    _moveMonster();
+                    _moveMonsters();
 
                     yield return null;
                 }
             }
-
+            _gameFinishEventPublisher.Publish();
         }
 
         void _onMonsterDead(MonsterView monsterView)
@@ -130,7 +135,7 @@ namespace Tower
             }
             _removedTimes.Clear();
         }
-        void _moveMonster()
+        void _moveMonsters()
         {
             foreach (var monsterView in _activatedMonsterViews)
             {
