@@ -1,6 +1,5 @@
 ﻿using Puzzle;
 using Pyke;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +19,6 @@ namespace Tower
         [SerializeField]
         PuzzleProjectileViewContainer _puzzleProjectileViewContainer;
 
-        readonly EventPublisher<float, int> _gameFinishEventPublisher = new EventPublisher<float, int>();
-
         List<MonsterView> _activatedMonsterViews = new List<MonsterView>();
         Dictionary<float, List<MonsterView>> _spawnTimeToMonsterViews = new Dictionary<float, List<MonsterView>>();
 
@@ -30,9 +27,7 @@ namespace Tower
         float _timer;
         bool _shouldContinue;
 
-        public IDisposable SubscribeFinish(Action<float, int> onFinish) => _gameFinishEventPublisher.Subscribe(onFinish);
-
-        public IEnumerator Run()
+        IEnumerator Start()
         {
             var monsterViewFactory = new MonsterViewFactory(_monsterViewContainer, _laneViewContainer);
             _puzzleProjectileFactory = new PuzzleProjectileFactory(_puzzleProjectileViewContainer);
@@ -80,12 +75,12 @@ namespace Tower
 
                     _testProjectiles();
                     _activateMonster();
-                    _moveMonsters();
+                    _moveMonster();
 
                     yield return null;
                 }
             }
-            _gameFinishEventPublisher.Publish(_timer, 0);
+
         }
 
         void _onMonsterDead(MonsterView monsterView)
@@ -96,19 +91,19 @@ namespace Tower
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                StartCoroutine(_shoot(new PuzzleSphere(1, PieceColor.Red, 1)));
+                StartCoroutine(Shoot(PieceColor.Red, 1));
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                StartCoroutine(_shoot(new PuzzleSphere(2, PieceColor.Blue, 1)));
+                StartCoroutine(Shoot(PieceColor.Blue, 2));
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                StartCoroutine(_shoot(new PuzzleSphere(3, PieceColor.Yellow, 1)));
+                StartCoroutine(Shoot(PieceColor.Yellow, 3));
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                StartCoroutine(_shoot(new PuzzleSphere(4, PieceColor.Green, 1)));
+                StartCoroutine(Shoot(PieceColor.Green, 4));
             }
         }
         List<float> _removedTimes = new List<float>();
@@ -135,7 +130,7 @@ namespace Tower
             }
             _removedTimes.Clear();
         }
-        void _moveMonsters()
+        void _moveMonster()
         {
             foreach (var monsterView in _activatedMonsterViews)
             {
@@ -143,20 +138,11 @@ namespace Tower
             }
         }
 
-        public IEnumerable MultiShoot(PuzzleSphere[] spheres)
+        public IEnumerator Shoot(PieceColor pieceColor, byte lane)
         {
-            foreach (var sphere in spheres)
-            {
-                StartCoroutine(_shoot(sphere));
-            }
-            yield return null;
-        }
+            CannonView cannonView = _laneViewContainer.GetLaneViewFromLaneNumber(lane).CannonView;
 
-        IEnumerator _shoot(PuzzleSphere sphere)
-        {
-            CannonView cannonView = _laneViewContainer.GetLaneViewFromLaneNumber(sphere.Lane).CannonView;
-
-            var puzzleProjectileView = _puzzleProjectileFactory.CreatePuzzleProjectile(sphere.Color);
+            var puzzleProjectileView = _puzzleProjectileFactory.CreatePuzzleProjectile(pieceColor);
             foreach (var hitTarget in cannonView.Shoot(puzzleProjectileView))
             {
                 if (!_shouldContinue)
@@ -179,3 +165,4 @@ namespace Tower
         }
     }
 }
+
