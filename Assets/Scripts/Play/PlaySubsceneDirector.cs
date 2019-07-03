@@ -22,15 +22,14 @@ namespace Play
             StartCoroutine(_towerDirector.Run());
 
             PlayResult? result = null;
-            foreach (var element in Run())
+            foreach (var element in _run())
             {
                 result = element;
                 yield return null;
             }
-            Debug.Log(result);
         }
 
-        IEnumerable<PlayResult?> Run()
+        IEnumerable<PlayResult?> _run()
         {
             PlayResult? playResult = null;
             PuzzleSphere[] puzzleResult = null;
@@ -47,11 +46,10 @@ namespace Play
                         puzzleResult = element;
                         yield return null;
                     }
-                    foreach (var sphere in puzzleResult)
+                    foreach (var _ in _towerDirector.MultiShoot(puzzleResult))
                     {
-                        StartCoroutine(_towerDirector.Shoot(sphere.Color, sphere.Lane));
+                        yield return null;
                     }
-                    yield return null;
                 }
             }
             yield return playResult;

@@ -96,19 +96,19 @@ namespace Tower
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                StartCoroutine(Shoot(PieceColor.Red, 1));
+                StartCoroutine(_shoot(new PuzzleSphere(1, PieceColor.Red, 1)));
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                StartCoroutine(Shoot(PieceColor.Blue, 2));
+                StartCoroutine(_shoot(new PuzzleSphere(2, PieceColor.Blue, 1)));
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                StartCoroutine(Shoot(PieceColor.Yellow, 3));
+                StartCoroutine(_shoot(new PuzzleSphere(3, PieceColor.Yellow, 1)));
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                StartCoroutine(Shoot(PieceColor.Green, 4));
+                StartCoroutine(_shoot(new PuzzleSphere(4, PieceColor.Green, 1)));
             }
         }
         List<float> _removedTimes = new List<float>();
@@ -143,11 +143,20 @@ namespace Tower
             }
         }
 
-        public IEnumerator Shoot(PieceColor pieceColor, byte lane)
+        public IEnumerable MultiShoot(PuzzleSphere[] spheres)
         {
-            CannonView cannonView = _laneViewContainer.GetLaneViewFromLaneNumber(lane).CannonView;
+            foreach (var sphere in spheres)
+            {
+                StartCoroutine(_shoot(sphere));
+            }
+            yield return null;
+        }
 
-            var puzzleProjectileView = _puzzleProjectileFactory.CreatePuzzleProjectile(pieceColor);
+        IEnumerator _shoot(PuzzleSphere sphere)
+        {
+            CannonView cannonView = _laneViewContainer.GetLaneViewFromLaneNumber(sphere.Lane).CannonView;
+
+            var puzzleProjectileView = _puzzleProjectileFactory.CreatePuzzleProjectile(sphere.Color);
             foreach (var hitTarget in cannonView.Shoot(puzzleProjectileView))
             {
                 if (!_shouldContinue)
@@ -170,4 +179,3 @@ namespace Tower
         }
     }
 }
-
