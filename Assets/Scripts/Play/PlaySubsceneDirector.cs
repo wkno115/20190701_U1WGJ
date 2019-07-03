@@ -19,7 +19,8 @@ namespace Play
             {
                 yield return null;
             }
-            StartCoroutine(_towerDirector.Run());
+            //分岐コルーチンでTowerDirectorを起動
+            //StartCoroutine(_towerDirector.Run());
 
             PlayResult? result = null;
             foreach (var element in _run())
@@ -34,10 +35,11 @@ namespace Play
             PlayResult? playResult = null;
             PuzzleSphere[] puzzleResult = null;
 
-            using (_towerDirector.SubscribeFinish((time, score) =>
+            /*TowerDirectorから，終了時の結果を購読する．
+            using (_towerDirector.SubscribeHogeHoge((time, score) =>
             {
                 playResult = new PlayResult(time, score);
-            }))
+            }))*/
             {
                 while (!playResult.HasValue)
                 {
@@ -46,10 +48,12 @@ namespace Play
                         puzzleResult = element;
                         yield return null;
                     }
-                    foreach (var _ in _towerDirector.MultiShoot(puzzleResult))
+                    //TowerDirectorに対して，発射命令を送る．
+                    /*
+                    foreach (var _ in _towerDirector.HogeHoge(puzzleResult))
                     {
                         yield return null;
-                    }
+                    }*/
                 }
             }
             yield return playResult;
