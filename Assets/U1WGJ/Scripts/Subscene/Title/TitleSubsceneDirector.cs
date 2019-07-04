@@ -15,7 +15,6 @@ namespace Title
         {
             var shouldContinue = true;
             _ui.gameObject.SetActive(true);
-
             using (_ui.SubscribeTap(() => shouldContinue = false))
             {
                 while (shouldContinue)
@@ -23,7 +22,7 @@ namespace Title
                     yield return null;
                 }
             }
-            _ui.gameObject.SetActive(true);
+            _ui.gameObject.SetActive(false);
         }
     }
 }
