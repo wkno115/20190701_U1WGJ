@@ -674,6 +674,11 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 396793092216628016, guid: 515252074736cbd4aa1ac7ad136859d5,
+        type: 3}
+      propertyPath: _rankText
+      value: 
+      objectReference: {fileID: 1159108180}
     - target: {fileID: 6090892657377471620, guid: 515252074736cbd4aa1ac7ad136859d5,
         type: 3}
       propertyPath: m_inputSource
@@ -1101,6 +1106,18 @@ Transform:
   m_Father: {fileID: 1397776861}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1159108180 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3074016854501962728, guid: 515252074736cbd4aa1ac7ad136859d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 500980435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1397776859
 GameObject:
   m_ObjectHideFlags: 0
