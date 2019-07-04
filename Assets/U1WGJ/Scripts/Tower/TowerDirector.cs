@@ -47,10 +47,6 @@ namespace Tower
             _lane3Interval = _interval;
             _lane4Interval = _interval;
         }
-        IEnumerator Start()
-        {
-            yield return Run();
-        }
 
         public IEnumerator Run()
         {
