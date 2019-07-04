@@ -1583,26 +1583,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3881336632933085308, guid: 61a209ad8810a394a9556c132f6430bd,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3881336632933085308, guid: 61a209ad8810a394a9556c132f6430bd,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 3881336631392949990, guid: 61a209ad8810a394a9556c132f6430bd,
         type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: 9372d98f9a8bb6a4d9cbfb1484b8f0b9, type: 2}
-    - target: {fileID: 7924407145584200287, guid: 61a209ad8810a394a9556c132f6430bd,
-        type: 3}
-      propertyPath: m_inputSource
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7924407145584200287, guid: 61a209ad8810a394a9556c132f6430bd,
         type: 3}
       propertyPath: m_havePropertiesChanged
