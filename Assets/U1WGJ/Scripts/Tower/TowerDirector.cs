@@ -1,4 +1,5 @@
-﻿using Puzzle;
+﻿using Play;
+using Puzzle;
 using Pyke;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using Tower.Cannon;
 using Tower.Lane;
 using Tower.Monster;
+using Tower.UI;
 using UnityEngine;
 
 namespace Tower
@@ -19,7 +21,13 @@ namespace Tower
         [SerializeField]
         PuzzleProjectileViewContainer _puzzleProjectileViewContainer;
         [SerializeField]
+        TowerUI _towerUI;
+        [SerializeField]
         float _interval = .5f;
+        [SerializeField]
+        int _sameColorScore = 100;
+        [SerializeField]
+        int _diffColorScore = 0;
 
         List<MonsterView> _activatedMonsterViews = new List<MonsterView>();
         Dictionary<float, List<MonsterView>> _spawnTimeToMonsterViews = new Dictionary<float, List<MonsterView>>();
@@ -27,6 +35,7 @@ namespace Tower
         PuzzleProjectileFactory _puzzleProjectileFactory;
 
         float _timer;
+        int _score;
         bool _shouldContinue;
         bool _shouldPause;
 
@@ -48,7 +57,7 @@ namespace Tower
             _lane4Interval = _interval;
         }
 
-        public IEnumerator Run()
+        public IEnumerable<PlayResult?> Run()
         {
             var monsterViewFactory = new MonsterViewFactory(_monsterViewContainer, _laneViewContainer);
             _puzzleProjectileFactory = new PuzzleProjectileFactory(_puzzleProjectileViewContainer);
@@ -93,6 +102,7 @@ namespace Tower
                 while (_shouldContinue)
                 {
                     _timer += Time.deltaTime;
+                    _towerUI.SetTime(_timer);
 
                     _testProjectiles();
                     _activateMonster();
@@ -102,7 +112,7 @@ namespace Tower
                     yield return null;
                 }
             }
-
+            yield return new PlayResult(_timer, _score);
         }
 
         void _onMonsterDead(MonsterView monsterView)
@@ -235,7 +245,13 @@ namespace Tower
                     if (puzzleProjectileView.PieceColor == hitTarget.PieceColor)
                     {
                         damage *= 2;
+                        _score += _sameColorScore;
                     }
+                    else
+                    {
+                        _score += _diffColorScore;
+                    }
+                    _towerUI.SetScore(_score);
                     hitTarget.ChangeHp(-damage);
                     break;
                 }
