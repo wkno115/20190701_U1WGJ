@@ -18,6 +18,8 @@ namespace Tower
         LaneViewContainer _laneViewContainer;
         [SerializeField]
         PuzzleProjectileViewContainer _puzzleProjectileViewContainer;
+        [SerializeField]
+        float _interval = .5f;
 
         List<MonsterView> _activatedMonsterViews = new List<MonsterView>();
         Dictionary<float, List<MonsterView>> _spawnTimeToMonsterViews = new Dictionary<float, List<MonsterView>>();
@@ -26,8 +28,31 @@ namespace Tower
 
         float _timer;
         bool _shouldContinue;
+        bool _shouldPause;
 
+        float _lane1Interval;
+        float _lane2Interval;
+        float _lane3Interval;
+        float _lane4Interval;
+
+        Queue<PieceColor> _lane1PieceQueue = new Queue<PieceColor>();
+        Queue<PieceColor> _lane2PieceQueue = new Queue<PieceColor>();
+        Queue<PieceColor> _lane3PieceQueue = new Queue<PieceColor>();
+        Queue<PieceColor> _lane4PieceQueue = new Queue<PieceColor>();
+
+        void Awake()
+        {
+            _lane1Interval = _interval;
+            _lane2Interval = _interval;
+            _lane3Interval = _interval;
+            _lane4Interval = _interval;
+        }
         IEnumerator Start()
+        {
+            yield return Run();
+        }
+
+        public IEnumerator Run()
         {
             var monsterViewFactory = new MonsterViewFactory(_monsterViewContainer, _laneViewContainer);
             _puzzleProjectileFactory = new PuzzleProjectileFactory(_puzzleProjectileViewContainer);
@@ -75,6 +100,7 @@ namespace Tower
 
                     _testProjectiles();
                     _activateMonster();
+                    _shootProjectiles();
                     _moveMonster();
 
                     yield return null;
@@ -91,19 +117,19 @@ namespace Tower
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                StartCoroutine(Shoot(PieceColor.Red, 1));
+                Shoot(PieceColor.Red, 1);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                StartCoroutine(Shoot(PieceColor.Blue, 2));
+                Shoot(PieceColor.Blue, 2);
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                StartCoroutine(Shoot(PieceColor.Yellow, 3));
+                Shoot(PieceColor.Yellow, 3);
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                StartCoroutine(Shoot(PieceColor.Green, 4));
+                Shoot(PieceColor.Green, 4);
             }
         }
         List<float> _removedTimes = new List<float>();
@@ -134,22 +160,76 @@ namespace Tower
         {
             foreach (var monsterView in _activatedMonsterViews)
             {
-                monsterView.Move(Vector3.back * Time.deltaTime);
+                if (!_shouldPause)
+                {
+                    monsterView.Move(Vector3.back * Time.deltaTime);
+                }
             }
         }
 
-        public IEnumerator Shoot(PieceColor pieceColor, byte lane)
+        void _shootProjectiles()
+        {
+            _lane1Interval -= Time.deltaTime;
+            if (_lane1Interval < 0 && _lane1PieceQueue.Count > 0)
+            {
+                StartCoroutine(_shoot(_lane1PieceQueue.Dequeue(), 1));
+                _lane1Interval = _interval;
+            }
+            _lane2Interval -= Time.deltaTime;
+            if (_lane2Interval < 0 && _lane2PieceQueue.Count > 0)
+            {
+                StartCoroutine(_shoot(_lane2PieceQueue.Dequeue(), 2));
+                _lane2Interval = _interval;
+            }
+            _lane3Interval -= Time.deltaTime;
+            if (_lane3Interval < 0 && _lane3PieceQueue.Count > 0)
+            {
+                StartCoroutine(_shoot(_lane3PieceQueue.Dequeue(), 3));
+                _lane3Interval = _interval;
+            }
+            _lane4Interval -= Time.deltaTime;
+            if (_lane4Interval < 0 && _lane4PieceQueue.Count > 0)
+            {
+                StartCoroutine(_shoot(_lane4PieceQueue.Dequeue(), 4));
+                _lane4Interval = _interval;
+            }
+        }
+
+        public void Shoot(PieceColor pieceColor, byte lane)
+        {
+            switch (lane)
+            {
+                case 1:
+                    _lane1PieceQueue.Enqueue(pieceColor);
+                    break;
+                case 2:
+                    _lane2PieceQueue.Enqueue(pieceColor);
+                    break;
+                case 3:
+                    _lane3PieceQueue.Enqueue(pieceColor);
+                    break;
+                case 4:
+                    _lane4PieceQueue.Enqueue(pieceColor);
+                    break;
+            }
+        }
+
+        IEnumerator _shoot(PieceColor pieceColor, byte lane)
         {
             SoundPlayComponent.Instance.PlayCannonFireSe();
 
-            CannonView cannonView = _laneViewContainer.GetLaneViewFromLaneNumber(lane).CannonView;
-
+            var cannonView = _laneViewContainer.GetLaneViewFromLaneNumber(lane).CannonView;
             var puzzleProjectileView = _puzzleProjectileFactory.CreatePuzzleProjectile(pieceColor);
             foreach (var hitTarget in cannonView.Shoot(puzzleProjectileView))
             {
                 if (!_shouldContinue)
                 {
                     break;
+                }
+                if (_shouldPause)
+                {
+                    yield return null;
+                    continue;
                 }
                 if (hitTarget != null)
                 {
@@ -166,6 +246,11 @@ namespace Tower
                 yield return null;
             }
             puzzleProjectileView.Dead();
+        }
+
+        public void Pause(bool isOn)
+        {
+            _shouldPause = isOn;
         }
     }
 }
