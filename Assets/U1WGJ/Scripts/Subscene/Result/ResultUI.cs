@@ -37,7 +37,7 @@ namespace Result.View
                     _rankText.text = "C";
                     break;
             }
-            return null;
+            yield return null;
         }
     }
 }

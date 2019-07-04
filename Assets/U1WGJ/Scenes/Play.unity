@@ -679,16 +679,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 396793092216628016, guid: 515252074736cbd4aa1ac7ad136859d5,
-        type: 3}
-      propertyPath: _rankText
-      value: 
-      objectReference: {fileID: 1159108180}
-    - target: {fileID: 6090892657377471620, guid: 515252074736cbd4aa1ac7ad136859d5,
-        type: 3}
-      propertyPath: m_inputSource
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6090892657377471620, guid: 515252074736cbd4aa1ac7ad136859d5,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -701,15 +691,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2937248421546614045, guid: 515252074736cbd4aa1ac7ad136859d5,
         type: 3}
-      propertyPath: m_inputSource
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937248421546614045, guid: 515252074736cbd4aa1ac7ad136859d5,
-        type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2937248421546614045, guid: 515252074736cbd4aa1ac7ad136859d5,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074016854501962728, guid: 515252074736cbd4aa1ac7ad136859d5,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074016854501962728, guid: 515252074736cbd4aa1ac7ad136859d5,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450773232694958342, guid: 515252074736cbd4aa1ac7ad136859d5,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450773232694958342, guid: 515252074736cbd4aa1ac7ad136859d5,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7743261448827061301, guid: 515252074736cbd4aa1ac7ad136859d5,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7743261448827061301, guid: 515252074736cbd4aa1ac7ad136859d5,
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -976,18 +991,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65cd40683f7dfde4eb51291e1e88dd8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1159108180 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3074016854501962728, guid: 515252074736cbd4aa1ac7ad136859d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 500980435}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1560682611 stripped
