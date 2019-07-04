@@ -1,6 +1,7 @@
 ﻿using Play;
 using Puzzle;
 using Pyke;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,8 @@ namespace Tower
 
         PuzzleProjectileFactory _puzzleProjectileFactory;
 
+        EventPublisher<PlayResult> _playResultEventPublisher = new EventPublisher<PlayResult>();
+
         float _timer;
         int _score;
         bool _shouldContinue;
@@ -57,7 +60,7 @@ namespace Tower
             _lane4Interval = _interval;
         }
 
-        public IEnumerable<PlayResult?> Run()
+        public IEnumerable Run()
         {
             var monsterViewFactory = new MonsterViewFactory(_monsterViewContainer, _laneViewContainer);
             _puzzleProjectileFactory = new PuzzleProjectileFactory(_puzzleProjectileViewContainer);
@@ -112,7 +115,9 @@ namespace Tower
                     yield return null;
                 }
             }
-            yield return new PlayResult(_timer, _score);
+
+            _playResultEventPublisher.Publish(new PlayResult(_timer, _score));
+            yield return null;
         }
 
         void _onMonsterDead(MonsterView monsterView)
@@ -263,6 +268,11 @@ namespace Tower
         public void Pause(bool isOn)
         {
             _shouldPause = isOn;
+        }
+
+        public IDisposable SubscribePlayResult(Action<PlayResult> action)
+        {
+            return _playResultEventPublisher.Subscribe(action);
         }
     }
 }
