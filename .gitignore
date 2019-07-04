@@ -73,8 +73,6 @@ Assets/IGL Free TileSet.meta
 Assets/IGL Free TileSet/
 Assets/TextMesh Pro.meta
 Assets/TextMesh Pro/
-Assets/Font.meta
-Assets/Font/
 Assets/Editor.meta
 Assets/Editor/
 Assets/NCMB.meta
@@ -83,6 +81,10 @@ Assets/Plugins.meta
 Assets/Plugins/
 Assets/naichilab.meta
 Assets/naichilab/
+
+#Font
+Assets/U1WGJ/Font.meta
+Assets/U1WGJ/Font/
 
 #Recording
 Recordings/
