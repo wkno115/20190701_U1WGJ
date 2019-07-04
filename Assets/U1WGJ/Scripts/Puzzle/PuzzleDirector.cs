@@ -21,6 +21,7 @@ namespace Puzzle
 
         PuzzleController _puzzleController;
 
+        public IDisposable SubscribeResultEffectStart(Action action) => _puzzleController.SubscribeResultEffectStart(action);
 
         public IEnumerable Initialize()
         {

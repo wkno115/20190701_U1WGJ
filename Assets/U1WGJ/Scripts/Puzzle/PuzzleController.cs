@@ -15,13 +15,15 @@ namespace Puzzle
     {
         readonly PuzzleUI _ui;
         readonly PuzzleDomain _domain;
-
+        readonly EventPublisher _resultAnimationStart = new EventPublisher();
 
         public PuzzleController(PuzzleUI ui, PuzzleDomain domain)
         {
             _ui = ui;
             _domain = domain;
         }
+
+        public IDisposable SubscribeResultEffectStart(Action action) => _resultAnimationStart.Subscribe(action);
 
         public IEnumerable Initialize()
         {
@@ -39,6 +41,7 @@ namespace Puzzle
             using (_domain.SubscribeResult(result =>
             {
                 animationProcess = _ui.ResultProcess(_domain.GetAllPieces());
+                _resultAnimationStart.Publish();
                 resultSphere = result;
             }))
             {

@@ -19,7 +19,7 @@ namespace Play
             {
                 yield return null;
             }
-            StartCoroutine(_towerDirector.Run());
+            StartCoroutine(_towerDirector.Run().GetEnumerator());
 
             PlayResult? result = null;
             foreach (var element in _run())
@@ -35,11 +35,12 @@ namespace Play
             PlayResult? playResult = null;
             PuzzleSphere[] puzzleResult = null;
 
-            /*TowerDirectorから時間とスコアをもらう
-            using (_towerDirector.Subscribe((time, score) =>
+            //TowerDirectorから時間とスコアをもらう
+            using (_towerDirector.SubscribePlayResult(result =>
             {
-                playResult = new PlayResult(time, score);
-            }))*/
+                playResult = result;
+            }))
+            using(_puzzleDirector.SubscribeResultEffectStart(()=>_towerDirector.Pause(true)))
             {
                 while (!playResult.HasValue)
                 {
@@ -52,6 +53,7 @@ namespace Play
                     {
                         _towerDirector.Shoot(spher.Color,spher.Lane);
                     }
+                    _towerDirector.Pause(false);
                 }
             }
             yield return playResult;
