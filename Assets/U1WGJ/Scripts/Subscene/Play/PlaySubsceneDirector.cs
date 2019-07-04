@@ -40,20 +40,27 @@ namespace Play
             {
                 playResult = result;
             }))
-            using(_puzzleDirector.SubscribeResultEffectStart(()=>_towerDirector.Pause(true)))
+            using (_puzzleDirector.SubscribeResultEffectStart(() => _towerDirector.Pause(true)))
             {
                 while (!playResult.HasValue)
                 {
-                    foreach (var element in _puzzleDirector.Run(() => true))
+                    foreach (var element in _puzzleDirector.Run())
                     {
+                        if (playResult.HasValue)
+                        {
+                            break;
+                        }
                         puzzleResult = element;
                         yield return null;
                     }
-                    foreach(var spher in puzzleResult)
+                    if (puzzleResult != null)
                     {
-                        _towerDirector.Shoot(spher.Color,spher.Lane);
+                        foreach (var spher in puzzleResult)
+                        {
+                            _towerDirector.Shoot(spher.Color, spher.Lane);
+                        }
+                        _towerDirector.Pause(false);
                     }
-                    _towerDirector.Pause(false);
                 }
             }
             yield return playResult;

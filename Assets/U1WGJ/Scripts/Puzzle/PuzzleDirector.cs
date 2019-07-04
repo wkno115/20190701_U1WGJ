@@ -47,7 +47,7 @@ namespace Puzzle
         /// 実行
         /// </summary>
         /// <returns>処理中 IEnumerable</returns>
-        public IEnumerable<PuzzleSphere[]> Run(Func<bool> shouldContinue)
+        public IEnumerable<PuzzleSphere[]> Run()
         {
             PuzzleSphere[] result = null;
             foreach (var element in _puzzleController.Run())

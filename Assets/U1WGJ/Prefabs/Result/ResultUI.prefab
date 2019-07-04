@@ -836,7 +836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _finishButton: {fileID: 2783308546991718674}
   _scoreText: {fileID: 6090892657377471620}
-  _rankText: {fileID: 0}
+  _rankText: {fileID: 3074016854501962728}
 --- !u!1 &8037003354548314539
 GameObject:
   m_ObjectHideFlags: 0
