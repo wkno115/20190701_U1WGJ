@@ -128,25 +128,6 @@ MonoBehaviour:
   _monsterViewContainer: {fileID: 2150551269130792769}
   _laneViewContainer: {fileID: 5548561861658168166}
   _puzzleProjectileViewContainer: {fileID: 449253881359807525}
-  _monsterSpawnInfo:
-  - _monsterType: 0
-    _lane: 1
-    _time: 2
-  - _monsterType: 1
-    _lane: 2
-    _time: 2
-  - _monsterType: 2
-    _lane: 4
-    _time: 5
-  - _monsterType: 0
-    _lane: 3
-    _time: 8
-  - _monsterType: 1
-    _lane: 1
-    _time: 10
-  - _monsterType: 2
-    _lane: 4
-    _time: 12
 --- !u!1 &5552218113103100115
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,10 +863,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 157233746920348359}
     m_Modifications:
-    - target: {fileID: 100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
-      propertyPath: m_Name
-      value: Bush_2
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.26
@@ -941,6 +918,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
       propertyPath: m_LocalScale.z
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
+      propertyPath: m_Name
+      value: Bush_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
@@ -1032,11 +1013,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8209173863679987548}
     m_Modifications:
-    - target: {fileID: 7776972907495291050, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
-        type: 3}
-      propertyPath: m_Name
-      value: Cannon
-      objectReference: {fileID: 0}
     - target: {fileID: 7780157559019188426, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1096,6 +1072,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776972907495291050, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
+        type: 3}
+      propertyPath: m_Name
+      value: Cannon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9755ef3055cfe3641b9aeecf2c8ecb12, type: 3}
@@ -1199,10 +1180,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 157233746920348359}
     m_Modifications:
-    - target: {fileID: 100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
-      propertyPath: m_Name
-      value: Bush_2 (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.32
@@ -1259,6 +1236,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
+      propertyPath: m_Name
+      value: Bush_2 (3)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
 --- !u!4 &4446831038981261830 stripped
@@ -1274,10 +1255,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 157233746920348359}
     m_Modifications:
-    - target: {fileID: 100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
-      propertyPath: m_Name
-      value: Bush_2 (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.1581721
@@ -1334,6 +1311,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
+      propertyPath: m_Name
+      value: Bush_2 (2)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
 --- !u!4 &4756582219437966071 stripped
@@ -1349,11 +1330,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 769415108324492391}
     m_Modifications:
-    - target: {fileID: 7776972907495291050, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
-        type: 3}
-      propertyPath: m_Name
-      value: Cannon
-      objectReference: {fileID: 0}
     - target: {fileID: 7780157559019188426, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1413,6 +1389,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776972907495291050, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
+        type: 3}
+      propertyPath: m_Name
+      value: Cannon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9755ef3055cfe3641b9aeecf2c8ecb12, type: 3}
@@ -1441,11 +1422,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4803286996783105446}
     m_Modifications:
-    - target: {fileID: 7776972907495291050, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
-        type: 3}
-      propertyPath: m_Name
-      value: Cannon
-      objectReference: {fileID: 0}
     - target: {fileID: 7780157559019188426, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1505,6 +1481,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776972907495291050, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
+        type: 3}
+      propertyPath: m_Name
+      value: Cannon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9755ef3055cfe3641b9aeecf2c8ecb12, type: 3}
@@ -1608,10 +1589,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 157233746920348359}
     m_Modifications:
-    - target: {fileID: 100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
-      propertyPath: m_Name
-      value: Bush_2 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.92
@@ -1667,6 +1644,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
       propertyPath: m_LocalScale.z
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
+      propertyPath: m_Name
+      value: Bush_2 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ad1332cfca6934ea307ce26bfc9dec, type: 3}
@@ -1833,11 +1814,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6783069118929688425}
     m_Modifications:
-    - target: {fileID: 7776972907495291050, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
-        type: 3}
-      propertyPath: m_Name
-      value: Cannon
-      objectReference: {fileID: 0}
     - target: {fileID: 7780157559019188426, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1897,6 +1873,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776972907495291050, guid: 9755ef3055cfe3641b9aeecf2c8ecb12,
+        type: 3}
+      propertyPath: m_Name
+      value: Cannon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9755ef3055cfe3641b9aeecf2c8ecb12, type: 3}

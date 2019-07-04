@@ -22,22 +22,6 @@ namespace Puzzle
         PuzzleController _puzzleController;
 
 
-        private IEnumerator Start()
-        {
-            foreach (var _ in Initialize())
-            {
-                yield return null;
-            }
-            while (true)
-            {
-                foreach (var _ in Run(() => true))
-                {
-                    yield return null;
-                }
-                yield return null;
-            }
-        }
-
         public IEnumerable Initialize()
         {
             var domain = new PuzzleDomain(COLUMNS, ROWS);
@@ -71,7 +55,7 @@ namespace Puzzle
                 result = element;
                 if (result != null)
                 {
-                    yield break;
+                    break;
                 }
             }
             yield return result;
