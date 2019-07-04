@@ -14,6 +14,8 @@ namespace Puzzle.View
         PuzzlePieceComponent _puzzlePiecePrefab;
         [SerializeField]
         float _moveTime = 0.5f;
+        [SerializeField]
+        float _durationSeconds = 1.0f;
 
         Transform _transform;
         PuzzlePieceComponent[,] _puzzlePieces;
@@ -22,6 +24,11 @@ namespace Puzzle.View
         void Awake()
         {
             _transform = transform;
+        }
+        void Start()
+        {
+            var canvasGroup = GetComponent<CanvasGroup>();
+            canvasGroup.DOFade(0.8f, _durationSeconds).SetEase(Ease.InCubic).SetLoops(-1, LoopType.Yoyo);
         }
 
         /// <summary>
