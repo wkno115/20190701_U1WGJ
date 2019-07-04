@@ -2,3 +2,4 @@ Assets/Santuary/Scenes/Sanctuary/LightmapSnapshot.asset filter=lfs diff=lfs merg
 git/objects/pack/pack-afde81f0c8331fd7426018f00de8f990d7d09526.pack filter=lfs diff=lfs merge=lfs -text
 */LightmapSnapshot.asset filter=lfs diff=lfs merge=lfs -text
 */SanctuaryProps.tif filter=lfs diff=lfs merge=lfs -text
+Assets/U1WGJ/Font/corp_round_v1[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
