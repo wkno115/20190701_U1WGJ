@@ -140,6 +140,8 @@ namespace Tower
 
         public IEnumerator Shoot(PieceColor pieceColor, byte lane)
         {
+            SoundPlayComponent.Instance.PlayCannonFireSe();
+
             CannonView cannonView = _laneViewContainer.GetLaneViewFromLaneNumber(lane).CannonView;
 
             var puzzleProjectileView = _puzzleProjectileFactory.CreatePuzzleProjectile(pieceColor);
@@ -151,6 +153,8 @@ namespace Tower
                 }
                 if (hitTarget != null)
                 {
+                    SoundPlayComponent.Instance.PlayProjectileHitSe();
+
                     var damage = puzzleProjectileView.AttackPower;
                     if (puzzleProjectileView.PieceColor == hitTarget.PieceColor)
                     {

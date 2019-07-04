@@ -16,6 +16,10 @@ namespace Pyke
             _audioSource = GetComponent<AudioSource>();
         }
 
+        public void SetAudioClip(AudioClip audioClip)
+        {
+            _audioSource.clip = audioClip;
+        }
         public void Play()
         {
             StartCoroutine(_play());

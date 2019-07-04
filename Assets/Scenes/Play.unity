@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 173136442}
   - component: {fileID: 173136441}
   m_Layer: 0
-  m_Name: BGM
+  m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

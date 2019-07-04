@@ -10,8 +10,6 @@ namespace Pyke
 
         [SerializeField]
         ParticleSystemHandleComponent _onDetectEffect;
-        [SerializeField]
-        AudioSourceHandleComponent _onDetectSound;
 
 
         [SerializeField]
@@ -44,7 +42,6 @@ namespace Pyke
                         if (target != null && !attackedTargets.Contains(target))
                         {
                             _onDetectEffect?.Play(target.Position);
-                            _onDetectSound?.Play();
 
                             attackedTargets.Add(target);
                             yield return target;
