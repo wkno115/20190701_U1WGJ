@@ -30,7 +30,7 @@ public class SoundPlayComponent : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        _soundPlayComponent = this;
+        _soundPlayComponent = this; 
     }
 
     public void PlayCannonFireSe()
