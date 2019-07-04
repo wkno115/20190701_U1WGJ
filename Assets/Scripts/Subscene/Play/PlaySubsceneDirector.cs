@@ -13,7 +13,7 @@ namespace Play
         [SerializeField]
         TowerDirector _towerDirector;
 
-        IEnumerator Start()
+        public IEnumerable<PlayResult?> Run()
         {
             foreach (var _ in _puzzleDirector.Initialize())
             {
@@ -28,6 +28,7 @@ namespace Play
                 result = element;
                 yield return null;
             }
+            yield return result;
         }
 
         IEnumerable<PlayResult?> _run()
