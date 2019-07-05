@@ -20,6 +20,11 @@ namespace Puzzle.View
         [SerializeField]
         PuzzlePieceContainer _puzzlePieceContainer;
         /// <summary>
+        /// パズルスフィアコンテナ
+        /// </summary>
+        [SerializeField]
+        PuzzleSphereContainer _puzzleSphereContainer;
+        /// <summary>
         /// 入力を扱うオブジェクト
         /// </summary>
         [SerializeField]
@@ -46,6 +51,10 @@ namespace Puzzle.View
             {
                 yield return null;
             }
+            foreach (var _ in _puzzleSphereContainer.Initialize(initialPieces))
+            {
+                yield return null;
+            }
         }
         /// <summary>
         /// ピース更新処理
@@ -69,6 +78,10 @@ namespace Puzzle.View
         public IEnumerable ResultProcess(PieceColor[,] nextPieces)
         {
             foreach (var _ in _puzzlePieceContainer.ResultProcess(nextPieces))
+            {
+                yield return null;
+            }
+            foreach (var _ in _puzzleSphereContainer.EffectAnimation(nextPieces))
             {
                 yield return null;
             }

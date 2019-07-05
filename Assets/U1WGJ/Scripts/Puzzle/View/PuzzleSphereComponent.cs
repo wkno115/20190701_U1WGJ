@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Puzzle.View
 {
@@ -9,6 +10,14 @@ namespace Puzzle.View
         [SerializeField]
         Image _image;
 
+        public bool IsMoving;
+
+        public void Move(Vector3 endPosition, float duration)
+        {
+            IsMoving = true;
+            Transform.DOLocalMove(endPosition, duration).SetEase(Ease.InBack).OnComplete(() => IsMoving = false);
+            Transform.DOScale(0, duration).SetEase(Ease.InQuint);
+        }
         public void SetColor(PieceColor color)
         {
             switch (color)
