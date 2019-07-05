@@ -11,6 +11,8 @@ public class SoundPlayComponent : MonoBehaviour
     AudioSourceHandleComponent _cannonFireSe;
     [SerializeField]
     AudioSourceHandleComponent _projectileHitSe;
+    [SerializeField]
+    AudioSourceHandleComponent _puzzleMoveSe;
 
     [SerializeField]
     AudioSource _bgmA;
@@ -40,6 +42,10 @@ public class SoundPlayComponent : MonoBehaviour
     public void PlayProjectileHitSe()
     {
         _projectileHitSe.Play();
+    }
+    public void PlayPuzzleMoveSe()
+    {
+        _puzzleMoveSe.Play();
     }
 
     public void PlayBgmA()

@@ -157,6 +157,8 @@ namespace Puzzle.View
         /// <returns></returns>
         IEnumerable _moveAnimation((View.TapSquareComponent.Direction direction, byte column, byte row) directionAndCoordinate)
         {
+            SoundPlayComponent.Instance.PlayPuzzleMoveSe();
+
             //移動を行う．
             var targetPieces = new List<PuzzlePieceComponent>();
             var distance = new Vector3(0, 0, 0);
