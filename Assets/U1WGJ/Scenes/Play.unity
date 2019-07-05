@@ -535,6 +535,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4739208422218434093, guid: 4c2822c65a68a314f815336a8e5cb335,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c2822c65a68a314f815336a8e5cb335, type: 3}
 --- !u!1001 &500980435
@@ -981,6 +986,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2fe97f6f6d62447b83dd8acaaf3f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &769062023 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9120849831379499927, guid: f1beaf55d114e25499bfe7ff82ad16ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 724889964915122984}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61117b0d7380954daa2716f10afda85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &786756554 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7924043683005828758, guid: e9a5583b6c159c74ebee8b12da936fdf,
@@ -1174,6 +1191,11 @@ PrefabInstance:
       propertyPath: _towerDirector
       value: 
       objectReference: {fileID: 786756554}
+    - target: {fileID: 7028007848409397708, guid: 3bb52429a4aafa647a24e3c74dee8336,
+        type: 3}
+      propertyPath: _ui
+      value: 
+      objectReference: {fileID: 769062023}
     - target: {fileID: 7028007848099471026, guid: 3bb52429a4aafa647a24e3c74dee8336,
         type: 3}
       propertyPath: _ui

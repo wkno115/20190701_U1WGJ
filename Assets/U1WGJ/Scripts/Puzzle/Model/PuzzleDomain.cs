@@ -66,9 +66,9 @@ namespace Puzzle.Model
             _updatePiecesEventPublisher.Publish(directionAndCoordinate);
         }
         public void Result()
-        {
-            _pieceCollection.Reset();
+        {            
             _resultEventPublisher.Publish(_pieceCollection.GetResultSpheres());
+            _pieceCollection.Reset();
         }
         public void Reset()
         {

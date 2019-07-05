@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Title;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Subscene
 {
@@ -20,22 +21,20 @@ namespace Subscene
         IEnumerator Start()
         {
             PlayResult? playResult = null;
-            while (true)
+            foreach (var _ in _titleSubsceneDirector.Run())
             {
-                foreach (var _ in _titleSubsceneDirector.Run())
-                {
-                    yield return null;
-                }
-                foreach (var result in _playSubsceneDirector.Run())
-                {
-                    playResult = result;
-                    yield return null;
-                }
-                foreach (var _ in _resultSubsceneDirector.Run(playResult))
-                {
-                    yield return null;
-                }
+                yield return null;
             }
+            foreach (var result in _playSubsceneDirector.Run())
+            {
+                playResult = result;
+                yield return null;
+            }
+            foreach (var _ in _resultSubsceneDirector.Run(playResult))
+            {
+                yield return null;
+            }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

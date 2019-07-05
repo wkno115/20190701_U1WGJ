@@ -1,4 +1,5 @@
-﻿using Puzzle;
+﻿using Play.View;
+using Puzzle;
 using System.Collections;
 using System.Collections.Generic;
 using Tower;
@@ -12,6 +13,8 @@ namespace Play
         PuzzleDirector _puzzleDirector;
         [SerializeField]
         TowerDirector _towerDirector;
+        [SerializeField]
+        PlayUI _ui;
 
         public IEnumerable<PlayResult?> Run()
         {
@@ -63,6 +66,12 @@ namespace Play
                     }
                 }
             }
+            _ui.gameObject.SetActive(true);
+            foreach(var _ in _ui.Run())
+            {
+                yield return null;
+            }
+            _ui.gameObject.SetActive(false);
             yield return playResult;
         }
     }
