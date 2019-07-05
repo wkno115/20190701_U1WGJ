@@ -734,6 +734,11 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2572188183120717226, guid: 515252074736cbd4aa1ac7ad136859d5,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 515252074736cbd4aa1ac7ad136859d5, type: 3}
 --- !u!114 &500980436 stripped
@@ -841,11 +846,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TitleUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4748908559364468587, guid: 562b5a970314c294d8be9d1e6b90bbe4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4748908559364468599, guid: 562b5a970314c294d8be9d1e6b90bbe4,
         type: 3}
@@ -1220,11 +1220,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayUI
       objectReference: {fileID: 0}
-    - target: {fileID: 6328033642844023380, guid: f1beaf55d114e25499bfe7ff82ad16ae,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2224216211907527449, guid: f1beaf55d114e25499bfe7ff82ad16ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1329,16 +1324,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 71931137767630490, guid: f1beaf55d114e25499bfe7ff82ad16ae,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 71931137767630490, guid: f1beaf55d114e25499bfe7ff82ad16ae,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1beaf55d114e25499bfe7ff82ad16ae, type: 3}
