@@ -61,7 +61,7 @@ namespace Puzzle.View
         /// </summary>
         /// <param name="nextPieces"></param>
         /// <returns></returns>
-        public IEnumerable ResultProcess(PieceColor[,] nextPieces)
+        public IEnumerable HideProcess()
         {
             //TODO:もっときれいに
 
@@ -80,6 +80,13 @@ namespace Puzzle.View
             {
                 yield return null;
             }
+        }
+        public IEnumerable ExpansionAnimation(PieceColor[,] nextPieces)
+        {
+            var columns = _puzzlePieces.GetLength(0);
+            var rows = _puzzlePieces.GetLength(1);
+            var isComplete = false;
+
             _setColor(nextPieces);
             isComplete = false;
             for (var column = 0; column < columns; column++)

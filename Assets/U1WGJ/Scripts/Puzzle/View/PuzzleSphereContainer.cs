@@ -29,7 +29,12 @@ namespace Puzzle.View
             }
             _setColor(pieces);
         }
-        public IEnumerable EffectAnimation(PieceColor[,] pieces)
+        public void UpdateColor(PieceColor[,] pieces)
+        {
+            //ピースの色と同期
+            _setColor(pieces);
+        }
+        public IEnumerable EffectAnimation(PieceColor[,] nextPieces)
         {
             //スケール変更
             var startTime = Time.timeSinceLevelLoad;
@@ -85,7 +90,7 @@ namespace Puzzle.View
                 yield return null;
             }
             _resetPosition();
-            _setColor(pieces);
+            _setColor(nextPieces);
         }
 
         /// <summary>
