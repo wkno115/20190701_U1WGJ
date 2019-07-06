@@ -65,20 +65,7 @@ namespace Tower
             var monsterViewFactory = new MonsterViewFactory(_monsterViewContainer, _laneViewContainer);
             _puzzleProjectileFactory = new PuzzleProjectileFactory(_puzzleProjectileViewContainer);
 
-            var monsterSpawnInfo = new MonsterSpawnInfo[100];
-            var spawnTimeDispersionMax = 5;
-            var spawnTimeDispersionMin = -5;
-            for (int i = 0; i < monsterSpawnInfo.Length; i++)
-            {
-                var spawnMonsterType = EnumCommon.Random<MonsterType>();
-                var spawnLane = (byte)RandomValueFactory.CreateRandomValue(1, 4);
-                var spawnTime = RandomValueFactory.CreateRandomValue(i + spawnTimeDispersionMin, i + spawnTimeDispersionMax);
-                if (spawnTime < 0)
-                {
-                    spawnTime = 0;
-                }
-                monsterSpawnInfo[i] = new MonsterSpawnInfo(spawnMonsterType, spawnLane, spawnTime);
-            }
+            var monsterSpawnInfo = _getSpawnInfo();
 
             var spawnMonsterViews = new MonsterView[monsterSpawnInfo.Length];
             foreach (var (info, index) in monsterSpawnInfo.Index())
@@ -118,6 +105,26 @@ namespace Tower
 
             _playResultEventPublisher.Publish(new PlayResult(_timer, _score));
             yield return null;
+        }
+
+        MonsterSpawnInfo[] _getSpawnInfo()
+        {
+            var monsterSpawnInfo = new MonsterSpawnInfo[100];
+            var spawnTimeDispersionMax = 5;
+            var spawnTimeDispersionMin = -5;
+            for (int i = 0; i < monsterSpawnInfo.Length; i++)
+            {
+                var spawnMonsterType = EnumCommon.Random<MonsterType>();
+                var spawnLane = (byte)RandomValueFactory.CreateRandomValue(1, 4);
+                var spawnTime = RandomValueFactory.CreateRandomValue(i + spawnTimeDispersionMin, i + spawnTimeDispersionMax);
+                if (spawnTime < 0)
+                {
+                    spawnTime = 0;
+                }
+                monsterSpawnInfo[i] = new MonsterSpawnInfo(spawnMonsterType, spawnLane, spawnTime);
+            }
+
+            return monsterSpawnInfo;
         }
 
         void _onMonsterDead(MonsterView monsterView)
