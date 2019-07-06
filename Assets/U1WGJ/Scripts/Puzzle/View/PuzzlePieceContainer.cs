@@ -13,7 +13,7 @@ namespace Puzzle.View
         [SerializeField]
         PuzzlePieceComponent _puzzlePiecePrefab;
         [SerializeField]
-        float _moveTime = 0.5f;
+        float _scaleTime = 0.5f;
         [SerializeField]
         float _durationSeconds = 1.0f;
 
@@ -73,7 +73,7 @@ namespace Puzzle.View
             {
                 for (var row = 0; row < rows; row++)
                 {
-                    _puzzlePieces[column, row].Transform.DOScale(0, 1f).OnComplete(() => isComplete = true);
+                    _puzzlePieces[column, row].Transform.DOScale(0, _scaleTime).OnComplete(() => isComplete = true);
                 }
             }
             while (!isComplete)
@@ -86,7 +86,7 @@ namespace Puzzle.View
             {
                 for (var row = 0; row < rows; row++)
                 {
-                    _puzzlePieces[column, row].Transform.DOScale(1, 1f).OnComplete(() => isComplete = true);
+                    _puzzlePieces[column, row].Transform.DOScale(1, _scaleTime).OnComplete(() => isComplete = true);
                 }
             }
             while (!isComplete)
@@ -182,7 +182,7 @@ namespace Puzzle.View
             var isComplete = false;
             foreach (var piece in targetPieces)
             {
-                piece.Transform.DOLocalMove(piece.Transform.localPosition + distance, _moveTime).OnComplete(() => isComplete = true);
+                piece.Transform.DOLocalMove(piece.Transform.localPosition + distance, _scaleTime).OnComplete(() => isComplete = true);
             }
             while (!isComplete)
             {

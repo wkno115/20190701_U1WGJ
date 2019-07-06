@@ -15,7 +15,11 @@ namespace Puzzle.View
         public void Move(Vector3 endPosition, float duration)
         {
             IsMoving = true;
-            Transform.DOLocalMove(endPosition, duration).SetEase(Ease.InBack).OnComplete(() => IsMoving = false);
+            Transform.DOLocalMove(endPosition, duration).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                IsMoving = false;
+                SoundPlayComponent.Instance.PlaySphereSe();
+            });
             Transform.DOScale(0, duration).SetEase(Ease.InQuint);
         }
         public void SetColor(PieceColor color)

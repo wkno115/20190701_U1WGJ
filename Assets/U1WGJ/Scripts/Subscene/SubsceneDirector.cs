@@ -30,6 +30,7 @@ namespace Subscene
                 playResult = result;
                 yield return null;
             }
+            naichilab.RankingLoader.Instance.SendScoreAndShowRanking(playResult.Value.DefeatScore);
             foreach (var _ in _resultSubsceneDirector.Run(playResult))
             {
                 yield return null;
