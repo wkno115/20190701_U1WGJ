@@ -77,11 +77,11 @@ namespace Puzzle.View
         /// <returns></returns>
         public IEnumerable ResultProcess(PieceColor[,] nextPieces)
         {
-            foreach (var _ in _puzzlePieceContainer.ResultProcess(nextPieces))
+            foreach (var _ in _puzzleSphereContainer.EffectAnimation(nextPieces))
             {
                 yield return null;
             }
-            foreach (var _ in _puzzleSphereContainer.EffectAnimation(nextPieces))
+            foreach (var _ in _puzzlePieceContainer.ResultProcess(nextPieces))
             {
                 yield return null;
             }
