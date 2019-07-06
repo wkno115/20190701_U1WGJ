@@ -254,6 +254,7 @@ namespace Tower
                     }
                     else
                     {
+                        damage = 0;
                         _score += _diffColorScore;
                     }
                     _towerUI.SetScore(_score);
