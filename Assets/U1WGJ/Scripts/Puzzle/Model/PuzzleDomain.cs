@@ -14,7 +14,7 @@ namespace Puzzle.Model
         /// <summary>
         /// 結果イベント発行者
         /// </summary>
-        readonly EventPublisher<PuzzleSphere[]> _resultEventPublisher = new EventPublisher<PuzzleSphere[]>();
+        readonly EventPublisher<PuzzlePieceCollection> _resultEventPublisher = new EventPublisher<PuzzlePieceCollection>();
         /// <summary>
         /// パズル移動イベント発行者
         /// </summary>
@@ -41,7 +41,7 @@ namespace Puzzle.Model
         /// </summary>
         /// <param name="action">紐づけ処理</param>
         /// <returns>購読解除</returns>
-        public IDisposable SubscribeResult(Action<PuzzleSphere[]> action) => _resultEventPublisher.Subscribe(action);
+        public IDisposable SubscribeResult(Action<PuzzlePieceCollection> action) => _resultEventPublisher.Subscribe(action);
         /// <summary>
         /// ピースの更新を購読する．
         /// </summary>
@@ -66,9 +66,8 @@ namespace Puzzle.Model
             _updatePiecesEventPublisher.Publish(directionAndCoordinate);
         }
         public void Result()
-        {            
-            _resultEventPublisher.Publish(_pieceCollection.GetResultSpheres());
-            _pieceCollection.Reset();
+        {
+            _resultEventPublisher.Publish(_pieceCollection);
         }
         public void Reset()
         {

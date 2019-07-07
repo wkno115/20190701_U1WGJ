@@ -42,7 +42,8 @@ namespace Puzzle
             {
                 animationProcess = _ui.ResultProcess(_domain.GetAllPieces());
                 _resultAnimationStart.Publish();
-                resultSphere = result;
+                resultSphere = result.GetResultSpheres();
+                _domain.Reset();
             }))
             {
                 while (true)

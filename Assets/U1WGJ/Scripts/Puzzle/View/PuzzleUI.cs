@@ -68,6 +68,7 @@ namespace Puzzle.View
             {
                 yield return null;
             }
+            _puzzleSphereContainer.UpdateColor(nextPieces);
             _setInputActive(true);
         }
         /// <summary>
@@ -77,11 +78,15 @@ namespace Puzzle.View
         /// <returns></returns>
         public IEnumerable ResultProcess(PieceColor[,] nextPieces)
         {
+            foreach (var _ in _puzzlePieceContainer.HideProcess())
+            {
+                yield return null;
+            }
             foreach (var _ in _puzzleSphereContainer.EffectAnimation(nextPieces))
             {
                 yield return null;
             }
-            foreach (var _ in _puzzlePieceContainer.ResultProcess(nextPieces))
+            foreach (var _ in _puzzlePieceContainer.ExpansionAnimation(nextPieces))
             {
                 yield return null;
             }
