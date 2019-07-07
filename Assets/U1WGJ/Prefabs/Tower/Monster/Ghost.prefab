@@ -110,7 +110,7 @@ MonoBehaviour:
   _monsterState:
     _monsterType: 0
     PieceColor: 0
-    MovementSpeed: 5
+    MovementSpeed: 2.5
     Hp: 100
     AttackDamage: 100
   _collisionHandleComponent: {fileID: 2855881090751268679}
@@ -151,6 +151,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3322700041386647001}
     m_Modifications:
+    - target: {fileID: 1000010538092382, guid: e067a1df356d3e84bb3f15113b018f67, type: 3}
+      propertyPath: m_Name
+      value: Ghost_Green
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012843571490, guid: e067a1df356d3e84bb3f15113b018f67, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -206,10 +210,6 @@ PrefabInstance:
     - target: {fileID: 4000012843571490, guid: e067a1df356d3e84bb3f15113b018f67, type: 3}
       propertyPath: m_LocalScale.z
       value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010538092382, guid: e067a1df356d3e84bb3f15113b018f67, type: 3}
-      propertyPath: m_Name
-      value: Ghost_Green
       objectReference: {fileID: 0}
     - target: {fileID: 95000013357091332, guid: e067a1df356d3e84bb3f15113b018f67,
         type: 3}

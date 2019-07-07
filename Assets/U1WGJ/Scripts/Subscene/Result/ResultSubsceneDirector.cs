@@ -38,15 +38,15 @@ namespace Result
 
         PlayResultRank _getRank(PlayResult result)
         {
-            if (result.DefeatScore >= 10000)
+            if (result.DefeatScore >= 4000)
             {
                 return PlayResultRank.S;
             }
-            else if (result.DefeatScore >= 5000)
+            else if (result.DefeatScore >= 3000)
             {
                 return PlayResultRank.A;
             }
-            else if (result.DefeatScore >= 2500)
+            else if (result.DefeatScore >= 1000)
             {
                 return PlayResultRank.B;
             }
