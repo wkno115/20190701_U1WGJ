@@ -115,7 +115,7 @@ namespace Tower
             for (int i = 0; i < monsterSpawnInfo.Length; i++)
             {
                 var spawnLane = (byte)RandomValueFactory.CreateRandomValue(1, 4);
-                var spawnTime = i * 2 + RandomValueFactory.CreateRandomValue(1, spawnTimeDispersionMax) / 10;
+                var spawnTime = i * 1.5f + RandomValueFactory.CreateRandomValue(1, spawnTimeDispersionMax) / 10;
                 var spawnMonsterType = spawnTime > 90f ? EnumCommon.Random<MonsterType>() : spawnTime > 60f ? (MonsterType)(byte)RandomValueFactory.CreateRandomValue(0, 1) : MonsterType.ghost;
                 if (spawnTime < 0)
                 {

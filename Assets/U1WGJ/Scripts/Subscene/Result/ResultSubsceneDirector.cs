@@ -38,7 +38,7 @@ namespace Result
 
         PlayResultRank _getRank(PlayResult result)
         {
-            if (result.DefeatScore >= 4000)
+            if (result.DefeatScore >= 6000)
             {
                 return PlayResultRank.S;
             }
