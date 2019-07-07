@@ -111,17 +111,19 @@ namespace Tower
         {
             var monsterSpawnInfo = new MonsterSpawnInfo[100];
             var spawnTimeDispersionMax = 5;
-            var spawnTimeDispersionMin = -5;
+
             for (int i = 0; i < monsterSpawnInfo.Length; i++)
             {
                 var spawnMonsterType = _timer > 40f ? EnumCommon.Random<MonsterType>() : _timer > 15f ? (MonsterType)(byte)RandomValueFactory.CreateRandomValue(0, 1) : MonsterType.ghost;
                 var spawnLane = (byte)RandomValueFactory.CreateRandomValue(1, 4);
-                var spawnTime = RandomValueFactory.CreateRandomValue(i + spawnTimeDispersionMin, i + spawnTimeDispersionMax);
+                var spawnTime = i + RandomValueFactory.CreateRandomValue(1, spawnTimeDispersionMax) / 10;
                 if (spawnTime < 0)
                 {
                     spawnTime = 0;
                 }
-                monsterSpawnInfo[i] = new MonsterSpawnInfo(spawnMonsterType, spawnLane, spawnTime);
+
+                var spawnInfo = new MonsterSpawnInfo(spawnMonsterType, spawnLane, spawnTime);
+                monsterSpawnInfo[i] = spawnInfo;
             }
 
             return monsterSpawnInfo;
