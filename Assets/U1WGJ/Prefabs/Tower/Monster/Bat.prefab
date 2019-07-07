@@ -110,7 +110,7 @@ MonoBehaviour:
   _monsterState:
     _monsterType: 1
     PieceColor: 0
-    MovementSpeed: 2.5
+    MovementSpeed: 3
     Hp: 100
     AttackDamage: 100
   _collisionHandleComponent: {fileID: 8933729344918051980}
@@ -151,6 +151,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6253596757756175737}
     m_Modifications:
+    - target: {fileID: 1000013827195344, guid: d82532fc4fd80bf4097d29efd331a0ff, type: 3}
+      propertyPath: m_Name
+      value: Bat_Green
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013189255144, guid: d82532fc4fd80bf4097d29efd331a0ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -206,10 +210,6 @@ PrefabInstance:
     - target: {fileID: 4000013189255144, guid: d82532fc4fd80bf4097d29efd331a0ff, type: 3}
       propertyPath: m_LocalScale.z
       value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000013827195344, guid: d82532fc4fd80bf4097d29efd331a0ff, type: 3}
-      propertyPath: m_Name
-      value: Bat_Green
       objectReference: {fileID: 0}
     - target: {fileID: 95000012289870092, guid: d82532fc4fd80bf4097d29efd331a0ff,
         type: 3}
